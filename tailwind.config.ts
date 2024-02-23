@@ -18,7 +18,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [new MiniCssExtractPlugin(), 'prettier-plugin-tailwindcss'],
+  plugins: [new MiniCssExtractPlugin(), 'prettier-plugin-tailwindcss', require("daisyui")],
 };
 
 export default config;
