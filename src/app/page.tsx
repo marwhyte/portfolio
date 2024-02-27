@@ -11,6 +11,9 @@ import modernizeMeLogo from '../../public/modernize-me-logo.png';
 import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
 import Image, { type ImageProps } from 'next/image';
 import { Button } from './components/Button';
+import Skills from './components/Skills';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function Contact() {
   return (
@@ -133,18 +136,22 @@ function Resume() {
 export default function Home() {
   return (
     <main className='bg-white dark:bg-gray-900'>
+      <Header />
+
       <Hero />
-      <div>
-        <div className='mx-auto mt-24 max-w-5xl md:mt-28'>
-          <div className='mx-auto grid max-w-xl  grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2'>
-            <Projects />
-            <div className='space-y-10 lg:pl-16 xl:pl-24'>
-              <Contact />
-              <Resume />
-            </div>
+      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+        <Skills />
+      </div>
+      <div className='mx-auto mt-24 max-w-5xl md:mt-28'>
+        <div className='mx-auto grid max-w-xl grid-cols-1  gap-y-20 px-12 lg:max-w-none lg:grid-cols-2'>
+          <Projects />
+          <div className='mb-24 space-y-10 lg:pl-16 xl:pl-24'>
+            <Contact />
+            <Resume />
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }
