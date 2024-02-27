@@ -7,8 +7,8 @@ import { ReactNode } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Marco's Portfolio",
-  description: "A glimbse into Marco's life!",
+  title: 'Marco White',
+  description: "A glimbse into Marco's work",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html className='!scroll-smooth' lang='en' suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
