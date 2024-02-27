@@ -1,4 +1,5 @@
-import { ComponentPropsWithoutRef } from 'react';
+import Link from 'next/link';
+import { ComponentPropsWithoutRef, ComponentType, SVGProps } from 'react';
 
 export function XIcon(props: ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -27,3 +28,35 @@ export function LinkedInIcon(props: ComponentPropsWithoutRef<'svg'>) {
     </svg>
   );
 }
+
+type IconLinkProps = {
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  href: string;
+};
+
+const IconLink = ({ icon: Icon, ...props }: IconLinkProps) => {
+  return (
+    <Link className='group -m-1 p-1' {...props}>
+      <Icon className='h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300' />
+    </Link>
+  );
+};
+
+const SocialIcons = () => {
+  return (
+    <>
+      <IconLink
+        icon={GitHubIcon}
+        href='https://github.com/marcowhyte'
+        aria-label='GitHub'
+      />
+      <IconLink
+        icon={LinkedInIcon}
+        href='https://www.linkedin.com/in/marcowhyte/'
+        aria-label='LinkedIn'
+      />
+    </>
+  );
+};
+
+export default SocialIcons;
