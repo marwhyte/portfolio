@@ -11,21 +11,34 @@ import modernizeMeLogo from '../../public/modernize-me-logo.png';
 import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
 import Image, { type ImageProps } from 'next/image';
 import { Button } from './components/Button';
+import Skills from './components/Skills';
+import { FormEvent } from 'react';
 
 function Contact() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    console.log(data);
+  };
+
   return (
-    <form
-      action='/thank-you'
-      className='rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40'
-    >
+    <form className='rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40'>
       <h2 className='flex text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
         <EnvelopeIcon className='h-6 w-6 flex-none' />
-        <span className='ml-3'>Stay up to date</span>
+        <span className='ml-3'>Get in contact</span>
       </h2>
       <p className='mt-2 text-sm text-zinc-600 dark:text-zinc-400'>
-        Get notified when I publish something new, and unsubscribe at any time.
+        Leave a message and I will get back to you as soon as possible.
       </p>
-      <div className='mt-6 flex'>
+      <div className='mt-6 w-full'>
+        <textarea
+          placeholder='Message'
+          aria-label='Message'
+          required
+          className='w-full min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm'
+        />
+      </div>
+      <div className='mt-2 flex'>
         <input
           type='email'
           placeholder='Email address'
@@ -33,8 +46,9 @@ function Contact() {
           required
           className='min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm'
         />
+
         <Button type='submit' className='ml-4 flex-none'>
-          Join
+          Send
         </Button>
       </div>
     </form>
@@ -134,14 +148,17 @@ export default function Home() {
   return (
     <main className='bg-white dark:bg-gray-900'>
       <Hero />
-      <div>
-        <div className='mx-auto mt-24 max-w-5xl md:mt-28'>
-          <div className='mx-auto grid max-w-xl  grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2'>
+      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+        <Skills />
+      </div>
+      <div className='mx-auto mt-24 max-w-5xl md:mt-28'>
+        <div className='mx-auto grid max-w-xl grid-cols-1  gap-y-20 px-6 lg:max-w-none lg:grid-cols-2'>
+          <div className='px-6 lg:px-0'>
             <Projects />
-            <div className='space-y-10 lg:pl-16 xl:pl-24'>
-              <Contact />
-              <Resume />
-            </div>
+          </div>
+          <div className='mb-24 space-y-10 lg:pl-16 xl:pl-24'>
+            <Contact />
+            <Resume />
           </div>
         </div>
       </div>

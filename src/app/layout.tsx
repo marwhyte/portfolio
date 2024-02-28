@@ -7,8 +7,8 @@ import { ReactNode } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Marco's Portfolio",
-  description: "A glimbse into Marco's life!",
+  title: 'Marco Whyte',
+  description: "A glimbse into Marco's life",
 };
 
 export default function RootLayout({
