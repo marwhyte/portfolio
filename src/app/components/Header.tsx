@@ -39,11 +39,6 @@ const Header = () => {
         <div className='flex lg:flex-1'>
           <a href='#' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Marco Whyte</span>
-            <img
-              className='h-8 w-auto'
-              src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-              alt=''
-            />
           </a>
         </div>
         <div
@@ -84,18 +79,14 @@ const Header = () => {
           <div className='flex items-center gap-x-6'>
             <a href='#' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Marco Whyte</span>
-              <img
-                className='h-8 w-auto'
-                src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                alt=''
-              />
+              <div className='flex items-center justify-center gap-x-6'>
+                <SocialIcons />
+              </div>
             </a>
-            <div className='ml-auto flex items-center justify-center gap-x-6'>
-              <SocialIcons />
-            </div>
+
             <button
               type='button'
-              className='-m-2.5 rounded-md p-2.5 text-zinc-800 dark:text-zinc-400'
+              className='-m-2.5 ml-auto rounded-md p-2.5 text-zinc-800 dark:text-zinc-400'
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className='sr-only'>Close menu</span>
