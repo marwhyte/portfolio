@@ -2,14 +2,11 @@
 
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
+import SocialIcons from './SocialIcons';
 
-type Props = {
-  isSticky: boolean;
-};
-
-const Header = ({ isSticky }: Props) => {
+const Header = () => {
   const navigation = [
     { name: 'Home', href: '#' },
     { name: 'About me', href: '#' },
@@ -17,14 +14,26 @@ const Header = ({ isSticky }: Props) => {
     { name: 'Contact', href: '#' },
   ];
 
-  console.log(isSticky);
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [hasScrolledDown, setHasScrolledDown] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolledDown(window.scrollY >= 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <header className='sticky top-0 z-50 bg-transparent'>
       <nav
-        className='mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8'
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8 ${hasScrolledDown ? 'bg-white shadow-sm transition-all duration-300 ease-in-out dark:bg-gray-900 lg:!bg-transparent lg:shadow-none' : ''}`}
         aria-label='Global'
       >
         <div className='flex lg:flex-1'>
@@ -37,7 +46,9 @@ const Header = ({ isSticky }: Props) => {
             />
           </a>
         </div>
-        <div className={'hidden lg:flex lg:gap-x-12'}>
+        <div
+          className={`hidden transition-all duration-300 ease-in-out lg:flex lg:gap-x-12 ${hasScrolledDown ? 'rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10' : ''}`}
+        >
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -68,8 +79,8 @@ const Header = ({ isSticky }: Props) => {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
       >
-        <div className='fixed inset-0 z-10' />
-        <Dialog.Panel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
+        <div className='fixed inset-0 z-50' />
+        <Dialog.Panel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
           <div className='flex items-center gap-x-6'>
             <a href='#' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Marco Whyte</span>
@@ -79,15 +90,12 @@ const Header = ({ isSticky }: Props) => {
                 alt=''
               />
             </a>
-            <a
-              href='#'
-              className='ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-            >
-              Sign up
-            </a>
+            <div className='ml-auto flex items-center justify-center gap-x-6'>
+              <SocialIcons />
+            </div>
             <button
               type='button'
-              className='-m-2.5 rounded-md p-2.5 text-gray-700'
+              className='-m-2.5 rounded-md p-2.5 text-zinc-800 dark:text-zinc-400'
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className='sr-only'>Close menu</span>

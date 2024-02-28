@@ -1,50 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import { ComponentType, SVGProps, useEffect, useRef, useState } from 'react';
-import { GitHubIcon, LinkedInIcon, XIcon } from './SocialIcons';
+import SocialIcons from './SocialIcons';
 import Image from 'next/image';
-import Header from './Header';
 import { ArrowDownCircleIcon } from '@heroicons/react/24/outline';
 import { Button } from './Button';
 
-type IconLinkProps = {
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
-  href: string;
-};
-
-const IconLink = ({ icon: Icon, ...props }: IconLinkProps) => {
-  return (
-    <Link className='group -m-1 p-1' {...props}>
-      <Icon className='h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300' />
-    </Link>
-  );
-};
-
 const Hero = () => {
-  const [isSticky, setSticky] = useState(false);
-  const avatarRef = useRef(null); // Ref for the avatar element
-
-  useEffect(() => {
-    const current = avatarRef.current;
-
-    const observer = new IntersectionObserver(
-      ([e]) => setSticky(e.intersectionRatio < 1),
-      { threshold: [1] }
-    );
-
-    if (avatarRef.current) observer.observe(avatarRef.current);
-
-    // Clean up the observer on unmount
-    return () => {
-      if (current) observer.unobserve(current);
-    };
-  }, []);
-
   return (
     <div className='relative isolate bg-white pt-14 dark:bg-gray-900'>
-      <Header isSticky={isSticky} />
-
       <div
         className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
         aria-hidden='true'
@@ -57,7 +20,7 @@ const Hero = () => {
           }}
         />
       </div>
-      <div className='py-24 sm:py-32 lg:pb-40'>
+      <div className='pb-24 lg:pb-40 lg:pt-24'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl text-center'>
             <Image
@@ -74,29 +37,16 @@ const Hero = () => {
               Welcome! I am a full-stack developer who loves to build things.
             </p>
             <div className='mt-10 flex items-center justify-center gap-x-6'>
-              <IconLink
-                icon={GitHubIcon}
-                href='https://github.com/marcowhyte'
-                aria-label='GitHub'
-              />
-              <IconLink
-                icon={LinkedInIcon}
-                href='https://www.linkedin.com/in/marcowhyte/'
-                aria-label='LinkedIn'
-              />
-              <IconLink
-                icon={XIcon}
-                href='https://twitter.com/marcowhyte'
-                aria-label='Twitter'
-              />
+              <SocialIcons />
             </div>
-            <div className='mt-10 flex animate-bounce items-center justify-center gap-x-6'>
-              <Button variant='tertiary' href='#projects'>
+            <div className='mt-24 flex animate-bounce items-center justify-center gap-x-6'>
+              <Button variant='tertiary' href='#skills'>
                 <ArrowDownCircleIcon className='h-6 w-6' />
               </Button>
             </div>
           </div>
         </div>
+        <div id='skills' />
       </div>
     </div>
   );

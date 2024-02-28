@@ -33,18 +33,12 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.neon span {
-  font-family: Yellowtail;
-  display: table-cell;
-  margin: 0;
-  font-size: 1.5em;
-  padding: 0;
-  -webkit-animation: neonGlow 3s linear infinite;
-  animation: neonGlow 3s linear infinite;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .paused {
+    animation-play-state: paused;
   }
 }
