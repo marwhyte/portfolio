@@ -13,6 +13,8 @@ import Image, { type ImageProps } from 'next/image';
 import { Button } from './components/Button';
 import Skills from './components/Skills';
 import { FormEvent } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function Contact() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -147,6 +149,8 @@ function Resume() {
 export default function Home() {
   return (
     <main className='bg-white dark:bg-gray-900'>
+      <Header />
+
       <Hero />
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <Skills />
@@ -162,6 +166,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }
