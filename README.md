@@ -5,7 +5,7 @@
     marcowhyte.com
   </h1>
 <p align="center">
-  My portfolio website <a href="https://marcowhyte.com" target="_blank">marcowhyte.com</a>, build with [Next.js](https://nextjs.org/) and [Tailwindcss](https://tailwindcss.com/). It is deployed using [Vercel](https://vercel.com/)
+  My portfolio website <a href="https://marcowhyte.com" target="_blank">marcowhyte.com</a>, build with <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://tailwindcss.com/" target="_blank">Tailwindcss</a>. It is deployed using <a href="https://vercel.com/" target="_blank">Vercel</a>.
 
 ## Getting Started
 
