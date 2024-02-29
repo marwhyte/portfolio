@@ -1,9 +1,11 @@
 <div align="center">
   <img alt="Logo" src="https://github.com/marwhyte/portfolio/assets/39717954/cb2546ab-7564-46b3-83a0-a6fa31ce544a" />
 </div>
-<h1 align="center">
-  marcowhyte.com
-</h1>
+<a href="https://marcowhyte.com" style="text-decoration: none;">
+  <h1 style="text-align: center;">
+    marcowhyte.com
+  </h1>
+</a>
 <p align="center">
   My portfolio website, build with [Next.js](https://nextjs.org/) and [Tailwindcss](https://tailwindcss.com/). It is deployed using [Vercel](https://vercel.com/)
 
