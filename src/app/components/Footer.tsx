@@ -26,7 +26,7 @@ const Footer = () => {
                 <NavLink href='#'>My work</NavLink>
                 <NavLink href='#'>Contact</NavLink>
               </div>
-              <p className='w-[400px] text-sm text-zinc-600 dark:text-zinc-400'>
+              <p className='max-w-[400px] px-4 text-center text-sm text-zinc-600 dark:text-zinc-400 lg:px-0 lg:text-left'>
                 This site was coded by me in{' '}
                 <Link
                   className='text-zinc-400 hover:!text-teal-500 dark:text-zinc-300'
