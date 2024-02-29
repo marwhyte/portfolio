@@ -7,10 +7,13 @@
 <p align="center">
   My portfolio website <a href="https://marcowhyte.com" target="_blank">marcowhyte.com</a>, build with <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://tailwindcss.com/" target="_blank">Tailwindcss</a>. It is deployed using <a href="https://vercel.com/" target="_blank">Vercel</a>.
 
-## Getting Started
 
-First, run the development server:
+## Getting Started Locally
 
+Install dependencies:
+pnpm i
+
+Then, run the development server:
 ```bash
 npm run dev
 # or
