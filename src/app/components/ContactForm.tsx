@@ -11,7 +11,7 @@ import { Transition } from '@headlessui/react';
 
 const ContactForm = () => {
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
