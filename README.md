@@ -1,7 +1,7 @@
 <div align="center">
   <img alt="Logo" src="https://github.com/marwhyte/portfolio/assets/39717954/cb2546ab-7564-46b3-83a0-a6fa31ce544a" />
 </div>
-  <h1 style="text-align: center;">
+  <h1 align="center">
     marcowhyte.com
   </h1>
 <p align="center">
