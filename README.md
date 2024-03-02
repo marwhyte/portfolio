@@ -10,6 +10,11 @@
 
 ## Getting Started Locally
 
+If you do not have `pnpm` set up, install it:
+```bash
+npm i -g pnpm
+```
+
 Install dependencies:
 ```bash
 pnpm i
