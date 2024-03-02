@@ -15,6 +15,14 @@ Install dependencies:
 pnpm i
 ```
 
+In order for the contact section to work, create a `.env.local` file with the following env variables:
+```
+FROM_EMAIL=
+POSTMARK_API_KEY=
+SUPERFACE_API_KEY=
+TO_EMAIL=
+```
+
 Then, run the development server:
 ```bash
 pnpm dev
