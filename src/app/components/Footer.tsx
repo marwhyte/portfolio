@@ -22,9 +22,9 @@ const Footer = () => {
             <div className='flex flex-col items-center justify-between gap-6 sm:flex-row'>
               <div className='flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200'>
                 <NavLink href='#'>Home</NavLink>
-                <NavLink href='#'>About me</NavLink>
-                <NavLink href='#'>My work</NavLink>
-                <NavLink href='#'>Contact</NavLink>
+                <NavLink href='#skills'>About me</NavLink>
+                <NavLink href='#work'>My work</NavLink>
+                <NavLink href='#contact'>Contact</NavLink>
               </div>
               <p className='max-w-[400px] px-4 text-center text-sm text-zinc-600 dark:text-zinc-400 lg:px-0 lg:text-left'>
                 This site was coded by me in{' '}

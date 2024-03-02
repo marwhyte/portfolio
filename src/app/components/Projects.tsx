@@ -15,7 +15,7 @@ const Projects = () => {
   ];
 
   return (
-    <div id='projects'>
+    <div style={{ scrollMarginTop: '75px' }} id='projects'>
       <div className='flex flex-col gap-16'>
         {projects.map((project) => (
           <Card as='li' key={project.name}>

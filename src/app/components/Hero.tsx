@@ -46,7 +46,6 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div id='skills' />
       </div>
     </div>
   );

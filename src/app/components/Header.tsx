@@ -9,9 +9,9 @@ import SocialIcons from './SocialIcons';
 const Header = () => {
   const navigation = [
     { name: 'Home', href: '#' },
-    { name: 'About me', href: '#' },
-    { name: 'My work', href: '#' },
-    { name: 'Contact', href: '#' },
+    { name: 'About me', href: '#skills' },
+    { name: 'My work', href: '#work' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
