@@ -37,7 +37,7 @@ const ContactForm = () => {
     }
   };
   return (
-    <div>
+    <div style={{ scrollMarginTop: '75px' }} id='contact'>
       <div
         aria-live='assertive'
         className='pointer-events-none fixed inset-0 z-[100] flex items-end px-4 py-6 sm:items-start sm:p-6'

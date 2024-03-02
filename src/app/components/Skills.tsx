@@ -29,7 +29,7 @@ const Skillset = ({ ariaHidden }: SkillsetProps) => {
   return (
     <ul
       aria-hidden={ariaHidden ? 'true' : undefined}
-      className='group-hover/skills:paused animate-infinite-scroll flex items-center justify-center py-10 md:justify-start [&_img]:max-w-none [&_li]:mx-8'
+      className='group-hover/skills:paused flex animate-infinite-scroll items-center justify-center py-10 md:justify-start [&_img]:max-w-none [&_li]:mx-8'
     >
       <SkillItem src='/graphql-logo.svg' alt='GraphQL Logo' label='GraphQL' />
       <SkillItem
@@ -75,7 +75,7 @@ const Skillset = ({ ariaHidden }: SkillsetProps) => {
 
 const Skills = () => {
   return (
-    <div>
+    <div id='skills' style={{ scrollMarginTop: '75px' }}>
       <div className='text-center text-[15px] font-medium leading-8 tracking-wider text-gray-400'>
         I love learning new technologies, here are some that I use at the moment
       </div>
