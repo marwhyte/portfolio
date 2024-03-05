@@ -39,7 +39,7 @@ const Hero = () => {
             <div className='mt-10 flex items-center justify-center gap-x-6'>
               <SocialIcons />
             </div>
-            <div className='mt-24 flex animate-bounce items-center justify-center gap-x-6'>
+            <div className='mt-8 flex animate-bounce items-center justify-center gap-x-6 lg:mt-24'>
               <Button variant='tertiary' href='#skills'>
                 <ArrowDownCircleIcon className='h-6 w-6' />
               </Button>
