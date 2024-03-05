@@ -77,12 +77,9 @@ const Header = () => {
         <div className='fixed inset-0 z-50' />
         <Dialog.Panel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
           <div className='flex items-center gap-x-6'>
-            <a href='#' className='-m-1.5 p-1.5'>
-              <span className='sr-only'>Marco Whyte</span>
-              <div className='flex items-center justify-center gap-x-6'>
-                <SocialIcons />
-              </div>
-            </a>
+            <div className='flex items-center justify-center gap-x-6'>
+              <SocialIcons />
+            </div>
 
             <button
               type='button'
@@ -100,6 +97,7 @@ const Header = () => {
                   <a
                     key={item.name}
                     href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
                     className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-700'
                   >
                     {item.name}
