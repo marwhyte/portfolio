@@ -1,16 +1,15 @@
 import { ArrowDownIcon, BriefcaseIcon } from '@heroicons/react/16/solid';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
+import Hero from './components/hero';
+import Projects from './components/projects';
 
 import grayceLogo from '../../public/grayce-logo.png';
 import modernizeMeLogo from '../../public/modernize-me-logo.png';
 import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
 import Image, { type ImageProps } from 'next/image';
-import { Button } from './components/Button';
-import Skills from './components/Skills';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ContactForm from './components/ContactForm';
+import { Button } from './components/button';
+import Skills from './components/skills';
+import Footer from './components/footer';
+import ContactForm from './components/contact-form';
 
 interface RoleType {
   company: string;

@@ -6,7 +6,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/16/solid';
 import { FormEvent, Fragment, useState } from 'react';
-import { Button } from './Button';
+import { Button } from './button';
 import { Transition } from '@headlessui/react';
 
 const ContactForm = () => {

@@ -3,8 +3,8 @@
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
-import DarkModeToggle from './DarkModeToggle';
-import SocialIcons from './SocialIcons';
+import DarkModeToggle from './dark-mode-toggle';
+import SocialIcons from './social-icons';
 
 const Header = () => {
   const navigation = [
