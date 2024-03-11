@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { ReactNode } from 'react';
+import Header from './components/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,12 @@ export default function RootLayout({
   return (
     <html className='!scroll-smooth' lang='en' suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <main className='min-h-screen bg-white dark:bg-gray-900'>
+            <Header />
+            <div className='mx-auto max-w-7xl px-6 lg:px-8'>{children}</div>
+          </main>
+        </Providers>
       </body>
     </html>
   );

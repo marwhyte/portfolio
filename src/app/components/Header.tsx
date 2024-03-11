@@ -8,8 +8,8 @@ import SocialIcons from './SocialIcons';
 
 const Header = () => {
   const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'About me', href: '#skills' },
+    { name: 'Home', href: '/' },
+    { name: 'Blog', href: '/blog' },
     { name: 'My work', href: '#work' },
     { name: 'Contact', href: '#contact' },
   ];

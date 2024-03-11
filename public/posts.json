@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": "making-the-web-faster",
+      "date": "June 23, 2021",
+      "title": "Making the Web. Faster."
+    },
+    {
+      "id": "next-for-vercel",
+      "date": "December 16, 2020",
+      "title": "Next for Vercel"
+    },
+    {
+      "id": "books-people-reread",
+      "date": "August 2, 2020",
+      "title": "Books people re-read"
+    },
+    {
+      "id": "develop-preview-test",
+      "date": "June 11, 2020",
+      "title": "Develop, Preview, Test"
+    }
+  ]
+}

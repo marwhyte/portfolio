@@ -6,8 +6,12 @@ const sdk = new SuperfaceClient({
   sdkAuthToken: process.env.SUPERFACE_API_KEY,
 });
 
-// Just check if all required fields are provided
-function formValid(body: any) {
+type Body = {
+  email: string;
+  message: string;
+};
+
+function formValid(body: Body) {
   return body.email && body.message;
 }
 

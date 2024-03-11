@@ -107,11 +107,9 @@ function Resume() {
 
 export default function Home() {
   return (
-    <main className='bg-white dark:bg-gray-900'>
-      <Header />
-
+    <>
       <Hero />
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+      <div className='px-6 lg:px-8'>
         <Skills />
       </div>
       <div className='mx-auto mt-24 max-w-5xl md:mt-28'>
@@ -126,6 +124,6 @@ export default function Home() {
         </div>
       </div>
       <Footer />
-    </main>
+    </>
   );
 }
