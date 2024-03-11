@@ -1,9 +1,9 @@
 'use client';
 
-import SocialIcons from './SocialIcons';
+import SocialIcons from './social-icons';
 import Image from 'next/image';
 import { ArrowDownCircleIcon } from '@heroicons/react/24/outline';
-import { Button } from './Button';
+import { Button } from './button';
 
 const Hero = () => {
   return (

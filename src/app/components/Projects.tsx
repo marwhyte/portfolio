@@ -1,4 +1,4 @@
-import { Card } from './Card';
+import { Card } from './card';
 import graphMakerLogo from '../../../public/graph-maker-logo.png';
 import Image from 'next/image';
 import { LinkIcon } from '@heroicons/react/20/solid';
