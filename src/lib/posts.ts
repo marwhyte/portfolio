@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export interface PostData {
+  category: string;
   content: string;
   date: string;
   slug: string;
@@ -36,6 +37,7 @@ export const getPosts = () => {
     // Combine the data with the id
     return {
       slug,
+      category: matterResult.data.category,
       content: matterResult.content,
       date: matterResult.data.date,
       title: matterResult.data.title,
