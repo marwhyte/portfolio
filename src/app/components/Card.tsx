@@ -40,7 +40,7 @@ Card.Link = function CardLink({
 }: ComponentPropsWithoutRef<typeof Link>) {
   return (
     <>
-      <div className='absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl' />
+      <div className='absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-gray-800/50  sm:-inset-x-6 sm:rounded-2xl' />
       <Link {...props}>
         <span className='absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl' />
         <span className='relative z-10'>{children}</span>
@@ -87,6 +87,23 @@ Card.Cta = function CardCta({ children }: { children: ReactNode }) {
       {children}
       <ChevronRightIcon className='ml-1 h-4 w-4 stroke-current' />
     </div>
+  );
+};
+
+Card.Category = function CardCategory({
+  children,
+  href,
+}: {
+  children: ReactNode;
+  href: string;
+}) {
+  return (
+    <a
+      href={href}
+      className='relative z-10 rounded-full bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100'
+    >
+      {children}
+    </a>
   );
 };
 

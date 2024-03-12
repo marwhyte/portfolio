@@ -7,7 +7,7 @@ import { Button } from './button';
 
 const Hero = () => {
   return (
-    <div className='relative isolate bg-white pt-14 dark:bg-gray-900'>
+    <div className='relative isolate min-h-screen bg-white pt-14 dark:bg-gray-900'>
       <div
         className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
         aria-hidden='true'
@@ -26,8 +26,8 @@ const Hero = () => {
             <Image
               className='mb-10 inline-block grow rounded-full'
               src='/avatar.png'
-              width={180}
-              height={180}
+              width={100}
+              height={100}
               alt=''
             />
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl sm:text-6xl'>
