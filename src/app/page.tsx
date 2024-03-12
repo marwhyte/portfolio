@@ -108,7 +108,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className='px-6 lg:px-8'>
+      <div className='max-w-7xl px-6 lg:px-8'>
         <Skills />
       </div>
       <div className='mx-auto mt-24 max-w-5xl md:mt-28'>

@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <main className='min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white'>
             <Header />
-            <div className='mx-auto max-w-7xl px-6 lg:px-8'>{children}</div>
+            <div className='mx-auto'>{children}</div>
           </main>
         </Providers>
       </body>
