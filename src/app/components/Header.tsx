@@ -20,7 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setHasScrolledDown(window.scrollY >= 100);
+      setHasScrolledDown(window.scrollY >= 90);
     };
     window.addEventListener('scroll', handleScroll);
 

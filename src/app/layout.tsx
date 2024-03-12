@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { ReactNode } from 'react';
 import Header from './components/header';
+import Footer from './components/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,10 +22,15 @@ export default function RootLayout({
     <html className='!scroll-smooth' lang='en' suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <main className='min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white'>
+          <div className='bg-white text-gray-900 dark:bg-gray-900 dark:text-white'>
             <Header />
-            <div className='mx-auto'>{children}</div>
-          </main>
+            <div className='flex min-h-screen flex-col'>
+              <main className='flex-grow'>
+                <div className='mx-32'>{children}</div>
+              </main>
+              <Footer />
+            </div>
+          </div>
         </Providers>
       </body>
     </html>
