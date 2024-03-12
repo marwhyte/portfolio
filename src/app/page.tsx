@@ -8,7 +8,6 @@ import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
 import Image, { type ImageProps } from 'next/image';
 import { Button } from './components/button';
 import Skills from './components/skills';
-import Footer from './components/footer';
 import ContactForm from './components/contact-form';
 
 interface RoleType {
@@ -122,7 +121,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
