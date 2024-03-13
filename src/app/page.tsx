@@ -1,4 +1,4 @@
-import { ArrowDownIcon, BriefcaseIcon } from '@heroicons/react/16/solid';
+import { BriefcaseIcon } from '@heroicons/react/16/solid';
 import Hero from './components/hero';
 import Projects from './components/projects';
 
@@ -6,7 +6,6 @@ import grayceLogo from '../../public/grayce-logo.png';
 import modernizeMeLogo from '../../public/modernize-me-logo.png';
 import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
 import Image, { type ImageProps } from 'next/image';
-import { Button } from './components/button';
 import Skills from './components/skills';
 import ContactForm from './components/contact-form';
 
@@ -29,21 +28,21 @@ function Role({ role }: { role: RoleType }) {
 
   return (
     <li className='flex gap-4'>
-      <div className='relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0'>
+      <div className='relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 dark:border dark:border-gray-700/50 dark:bg-gray-800 dark:ring-0'>
         <Image src={role.logo} alt='' className='h-7 w-7' unoptimized />
       </div>
       <dl className='flex flex-auto flex-wrap gap-x-2'>
         <dt className='sr-only'>Company</dt>
-        <dd className='w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100'>
+        <dd className='w-full flex-none text-sm font-medium text-gray-900 dark:text-gray-100'>
           {role.company}
         </dd>
         <dt className='sr-only'>Role</dt>
-        <dd className='text-xs text-zinc-500 dark:text-zinc-400'>
+        <dd className='text-xs text-gray-500 dark:text-gray-400'>
           {role.title}
         </dd>
         <dt className='sr-only'>Date</dt>
         <dd
-          className='ml-auto text-xs text-zinc-400 dark:text-zinc-500'
+          className='ml-auto text-xs text-gray-400 dark:text-gray-500'
           aria-label={`${startLabel} until ${endLabel}`}
         >
           <time dateTime={startDate}>{startLabel}</time>{' '}
@@ -84,9 +83,9 @@ function Resume() {
     <div
       id='work'
       style={{ scrollMarginTop: '75px' }}
-      className='rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40'
+      className='rounded-2xl border border-gray-100 p-6 dark:border-gray-700/40'
     >
-      <h2 className='flex text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
+      <h2 className='flex text-sm font-semibold text-gray-900 dark:text-gray-100'>
         <BriefcaseIcon className='h-6 w-6 flex-none' />
         <span className='ml-3'>Work</span>
       </h2>
@@ -95,10 +94,10 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href='#' variant='secondary' className='group mt-6 w-full'>
+      {/* <Button href='#' variant='secondary' className='group mt-6 w-full'>
         Download CV
-        <ArrowDownIcon className='h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50' />
-      </Button>
+        <ArrowDownIcon className='h-4 w-4 stroke-gray-400 transition group-active:stroke-gray-600 dark:group-hover:stroke-gray-50 dark:group-active:stroke-gray-50' />
+      </Button> */}
     </div>
   );
 }

@@ -1,36 +1,27 @@
 import { PostData, getPosts } from '@/lib/posts';
-import { Suspense, useState } from 'react';
-import useSWR from 'swr';
 import { Card } from '../components/card';
-
-type SortBy = 'date' | 'title' | 'views';
-
-type SortType = [SortBy, 'desc' | 'asc'];
+import { formatDate, formatViews } from '../utils';
+import { H1 } from './[slug]/components/h1';
 
 const Post = ({ post }: { post: PostData }) => {
-  const views = post.views;
-  const dateObject = new Date(post.date);
-
-  const formattedDate = dateObject.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-  console.log(formattedDate);
-
   return (
     <>
-      <div className='absolute -left-1.5 top-2 flex h-3 w-3 items-center justify-center rounded-full border-2 border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-800' />
+      <div className='absolute flex hidden h-3 w-3 -translate-x-[30.5px] translate-y-[7px] items-center justify-center rounded-full border border-gray-300 bg-white  dark:border-gray-400 dark:bg-gray-900 md:block' />
       <article className='md:grid md:grid-cols-4 md:items-baseline'>
         <Card className='md:col-span-3'>
-          <Card.Title href={`/blog/${post.slug}`}>{post.title}</Card.Title>
-          <Card.Eyebrow
-            as='time'
-            dateTime={post.date}
-            className='md:hidden'
-            decorate
-          >
-            {formattedDate}
+          <div className='flex w-full justify-between'>
+            <Card.Title href={`/blog/${post.slug}`}>{post.title}</Card.Title>
+            <div className='-mt-9 md:-mt-1'>
+              <Card.Category>{post.category}</Card.Category>
+              <div className='mt-2 text-center'>
+                <span className='relative z-10 text-xs !text-gray-400 dark:!text-gray-400'>
+                  {formatViews(post.views)}
+                </span>
+              </div>
+            </div>
+          </div>
+          <Card.Eyebrow as='time' dateTime={post.date} className='md:hidden'>
+            {formatDate(post.date)}
           </Card.Eyebrow>
           <Card.Cta>Read post</Card.Cta>
         </Card>
@@ -39,7 +30,7 @@ const Post = ({ post }: { post: PostData }) => {
           dateTime={post.date}
           className='hidden md:block'
         >
-          {formattedDate}
+          {formatDate(post.date)}
         </Card.Eyebrow>
       </article>
     </>
@@ -48,20 +39,28 @@ const Post = ({ post }: { post: PostData }) => {
 
 const Posts = ({ posts }: { posts: PostData[] }) => {
   return (
-    <ul className='flex max-w-3xl flex-col space-y-16 md:border-l md:border-zinc-300 md:pl-6 md:dark:border-zinc-100/40'>
+    <ul className='flex flex-col space-y-12 md:space-y-16 md:border-l md:border-gray-300 md:pl-6 md:dark:border-gray-100/40'>
       {posts.map((post) => (
-        <>
-          <li className='relative' key={post.slug}>
-            <Post post={post} />
-          </li>
-        </>
+        <li className='relative' key={post.slug}>
+          <Post post={post} />
+        </li>
       ))}
     </ul>
   );
 };
 
-export default function Blog() {
-  const posts: PostData[] = getPosts();
+export default async function Blog() {
+  const posts: PostData[] = await getPosts();
 
-  return <Posts posts={posts} />;
+  return (
+    <div className='mb-24'>
+      <div className='mb-16 text-center'>
+        <H1>My Blog</H1>
+        <p className='text-md mt-2'>
+          Learn more about my projects, work and personal life.
+        </p>
+      </div>
+      <Posts posts={posts} />
+    </div>
+  );
 }
