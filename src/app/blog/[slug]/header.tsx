@@ -1,4 +1,4 @@
-import { Card } from '@/app/components/card';
+import Card from '@/app/components/card';
 import { formatDate } from '@/app/utils';
 import { PostData } from '@/lib/posts';
 import { H1 } from './components/h1';

@@ -1,5 +1,5 @@
 import { PostData, getPosts } from '@/lib/posts';
-import { Card } from '../components/card';
+import Card from '../components/card';
 import { formatDate, formatViews } from '../utils';
 import { H1 } from './[slug]/components/h1';
 

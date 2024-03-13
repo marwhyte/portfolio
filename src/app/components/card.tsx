@@ -15,14 +15,14 @@ function ChevronRightIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function Card<T extends ElementType = 'div'>({
+const Card = <T extends ElementType = 'div'>({
   as,
   className,
   children,
 }: Omit<ComponentPropsWithoutRef<T>, 'as' | 'className'> & {
   as?: T;
   className?: string;
-}) {
+}) => {
   let Component = as ?? 'div';
 
   return (
@@ -32,7 +32,7 @@ export function Card<T extends ElementType = 'div'>({
       {children}
     </Component>
   );
-}
+};
 
 Card.Link = function CardLink({
   children,
@@ -133,3 +133,5 @@ Card.Eyebrow = function CardEyebrow<T extends ElementType = 'p'>({
     </Component>
   );
 };
+
+export default Card;
