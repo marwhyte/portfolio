@@ -9,11 +9,8 @@ import { LI as li } from './li';
 import { HR as hr } from './hr';
 import { Code as code } from './code';
 import { Image } from './image';
-import { Figure } from './figure';
 import { Snippet } from './snippet';
 import { Caption } from './caption';
-import { Callout } from './callout';
-import { Ref, FootNotes, FootNote } from './footnotes';
 import { Blockquote as blockquote } from './blockquote';
 
 export function PostBody({ children }: { children: string }) {
@@ -31,14 +28,9 @@ export function PostBody({ children }: { children: string }) {
         hr,
         code,
         p,
-        Ref,
-        FootNotes,
-        FootNote,
         blockquote,
-        Figure,
         Snippet,
         Caption,
-        Callout,
       }}
     />
   );
