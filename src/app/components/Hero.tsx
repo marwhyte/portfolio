@@ -3,7 +3,7 @@
 import SocialIcons from './social-icons';
 import Image from 'next/image';
 import { ArrowDownCircleIcon } from '@heroicons/react/24/outline';
-import { Button } from './button';
+import Button from './button';
 
 const Hero = () => {
   return (
