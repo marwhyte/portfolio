@@ -15,7 +15,7 @@ const SkillItem = ({ className, src, alt, label }: SkillItemProps) => {
         alt={alt}
         className='h-12 transition-transform duration-300 ease-in-out group-hover/skillItem:scale-150'
       />
-      <span className='text-md mt-6 text-zinc-500 opacity-0 transition-opacity duration-300 ease-in-out group-hover/skillItem:opacity-100 dark:text-zinc-200'>
+      <span className='text-md mt-6 text-gray-500 opacity-0 transition-opacity duration-300 ease-in-out group-hover/skillItem:opacity-100 dark:text-gray-200'>
         {label}
       </span>
     </li>

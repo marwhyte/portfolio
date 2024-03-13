@@ -24,9 +24,12 @@ export default function RootLayout({
         <Providers>
           <div className='bg-white text-gray-900 dark:bg-gray-900 dark:text-white'>
             <Header />
-            <div className='flex min-h-screen flex-col'>
+            <div
+              style={{ minHeight: 'calc(100vh - 76px)' }}
+              className='flex flex-col'
+            >
               <main className='flex-grow'>
-                <div className='mx-32'>{children}</div>
+                <div>{children}</div>
               </main>
               <Footer />
             </div>
