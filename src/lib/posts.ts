@@ -44,25 +44,6 @@ export const getPosts = async () => {
 };
 
 export const getPostBySlug = async (slug: string) => {
-  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-  if (!fs.existsSync(fullPath)) {
-    return null;
-  }
-
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const matterResult = matter(fileContents);
-
-  const viewCountKey = `post_views:${slug}`;
-  const rawViewCount: string | null = await redis.get(viewCountKey);
-  const viewCount = parseInt(rawViewCount ?? '0', 10);
-
-  return {
-    slug,
-    category: matterResult.data.category,
-    content: matterResult.content,
-    date: matterResult.data.date,
-    title: matterResult.data.title,
-    views: viewCount,
-    ...matterResult.data,
-  };
+  const allPostsData = await getPosts();
+  return allPostsData.find((post) => post.slug === slug);
 };
