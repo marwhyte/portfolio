@@ -12,3 +12,10 @@ export async function createView(postSlug: string): Promise<void> {
   // Revalidate the post cache, if you're using ISR or similar caching strategies
   revalidateTag('posts');
 }
+
+export async function getAllViews() {
+  const redisKeys = await redis.keys('post_views:*');
+  const viewsArray: string[] = await redis.mget(...redisKeys);
+
+  return viewsArray;
+}
