@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import redis from '@/app/redis';
+import { readdir } from 'fs/promises';
 
 export interface PostData {
   category: string;
@@ -12,36 +9,25 @@ export interface PostData {
   views: number;
 }
 
-const postsDirectory = path.join(process.cwd(), 'src/posts');
+export async function getPosts(): Promise<PostData[]> {
+  // Retrieve slugs from post routes
+  const slugs = (
+    await readdir('./src/app/blog/(posts)', { withFileTypes: true })
+  ).filter((dirent) => dirent.isDirectory());
 
-export const getPosts = async () => {
-  const fileNames = fs.readdirSync(postsDirectory);
+  // Retrieve metadata from MDX files
+  const posts: PostData[] = await Promise.all(
+    slugs.map(async ({ name }) => {
+      const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
+      return { slug: name, views: 0, ...metadata };
+    })
+  );
 
-  const slugs = fileNames.map((fileName) => fileName.replace(/\.mdx$/, ''));
-  const redisKeys = slugs.map((slug) => `post_views:${slug}`);
-  const viewsArray: string[] = await redis.mget(...redisKeys);
+  // Sort posts from newest to oldest
+  posts.sort((a, b) => +new Date(b.date) - +new Date(a.date));
 
-  const allPostsData = fileNames.map((fileName, index) => {
-    const slug = slugs[index];
-    const viewCount = parseInt(viewsArray[index], 10) || 0;
-
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
-
-    return {
-      slug,
-      category: matterResult.data.category,
-      content: matterResult.content,
-      date: matterResult.data.date,
-      title: matterResult.data.title,
-      views: viewCount,
-      ...matterResult.data,
-    };
-  });
-
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
-};
+  return posts;
+}
 
 export const getPostBySlug = async (slug: string) => {
   const allPostsData = await getPosts();

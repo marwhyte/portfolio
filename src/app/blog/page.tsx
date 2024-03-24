@@ -1,7 +1,7 @@
 import { PostData, getPosts } from '@/lib/posts';
 import Card from '../components/card';
 import { formatDate, formatViews } from '../utils';
-import { H1 } from './[slug]/components/h1';
+import { H1 } from '../../components/h1';
 
 const Post = ({ post }: { post: PostData }) => {
   return (
