@@ -1,4 +1,4 @@
-import { PostData } from '@/lib/posts';
+import { PostData, getPosts } from '@/lib/posts';
 import Card from '../components/card';
 import { formatDate, formatViews } from '../utils';
 import { H1 } from '../../components/h1';
@@ -50,7 +50,7 @@ const Posts = ({ posts }: { posts: PostData[] }) => {
 };
 
 export default async function Blog() {
-  const posts: PostData[] = [];
+  const posts: PostData[] = await getPosts();
 
   return (
     <div className='mb-24'>
