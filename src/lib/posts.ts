@@ -2,6 +2,7 @@ import { readdir } from 'fs/promises';
 import { Category } from './categories';
 import { Redis } from '@upstash/redis';
 import { captureException } from '@sentry/nextjs';
+import path from 'path';
 
 export interface PostData {
   category: Category;
@@ -18,11 +19,12 @@ export async function getPosts(): Promise<PostData[]> {
 
   const redis = Redis.fromEnv();
 
-  const slugs = (
-    await readdir('./src/app/blog/(posts)', { withFileTypes: true })
-  ).filter((dirent) => dirent.isDirectory());
+  const postsDirectory = path.join(process.cwd(), 'src/app/blog/(posts)');
+  const slugs = (await readdir(postsDirectory, { withFileTypes: true }))
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
 
-  const redisKeys = slugs.map(({ name }) => `post_views:${name}`);
+  const redisKeys = slugs.map((name) => `post_views:${name}`);
 
   let viewCounts: string[] = [];
   try {
@@ -34,7 +36,7 @@ export async function getPosts(): Promise<PostData[]> {
   }
   // Retrieve metadata from MDX files
   const posts: PostData[] = await Promise.all(
-    slugs.map(async ({ name }, index) => {
+    slugs.map(async (name, index) => {
       const viewCount = parseInt(viewCounts[index]) || 0;
 
       const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
