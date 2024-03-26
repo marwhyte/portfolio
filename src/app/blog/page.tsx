@@ -6,7 +6,6 @@ import { H1 } from '../../components/h1';
 const Post = ({ post }: { post: PostData }) => {
   return (
     <>
-      {post.slugs.map(({ name }) => `post_views:${name}`)}
       <div className='absolute flex hidden h-3 w-3 -translate-x-[30.5px] translate-y-[7px] items-center justify-center rounded-full border border-gray-300 bg-white  dark:border-gray-400 dark:bg-gray-900 md:block' />
       <article className='md:grid md:grid-cols-4 md:items-baseline'>
         <Card className='md:col-span-3'>
