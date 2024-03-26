@@ -22,7 +22,7 @@ export async function getPosts(): Promise<PostData[]> {
   ).filter((dirent) => dirent.isDirectory());
 
   const redisKeys = slugs.map(({ name }) => `post_views:${name}`);
-  const viewCounts: string[] = await redis.mget(...redisKeys);
+  const viewCounts: string[] = await redis.mget(redisKeys);
 
   // Retrieve metadata from MDX files
   const posts: PostData[] = await Promise.all(
