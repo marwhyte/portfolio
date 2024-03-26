@@ -1,6 +1,6 @@
 import { readdir } from 'fs/promises';
 import { Category } from './categories';
-import redis from '../app/redis';
+import { Redis } from '@upstash/redis';
 
 export interface PostData {
   category: Category;
@@ -14,7 +14,9 @@ export interface PostData {
 
 export async function getPosts(): Promise<PostData[]> {
   'use server';
-  // Retrieve slugs from post routes
+
+  const redis = Redis.fromEnv();
+
   const slugs = (
     await readdir('./src/app/blog/(posts)', { withFileTypes: true })
   ).filter((dirent) => dirent.isDirectory());
