@@ -1,6 +1,7 @@
 import { readdir } from 'fs/promises';
 import { Category } from './categories';
 import { Redis } from '@upstash/redis';
+import { captureException } from '@sentry/nextjs';
 
 export interface PostData {
   category: Category;
@@ -22,8 +23,15 @@ export async function getPosts(): Promise<PostData[]> {
   ).filter((dirent) => dirent.isDirectory());
 
   const redisKeys = slugs.map(({ name }) => `post_views:${name}`);
-  const viewCounts: string[] = await redis.mget(redisKeys);
 
+  let viewCounts: string[] = [];
+  try {
+    viewCounts = await redis.mget(redisKeys);
+    // Additional code to handle the case when viewCounts contains null or unexpected values
+  } catch (error) {
+    captureException(error);
+    throw error; // Re-throw the error after capturing it with Sentry
+  }
   // Retrieve metadata from MDX files
   const posts: PostData[] = await Promise.all(
     slugs.map(async ({ name }, index) => {
