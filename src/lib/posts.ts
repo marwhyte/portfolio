@@ -13,6 +13,7 @@ export interface PostData {
 }
 
 export async function getPosts(): Promise<PostData[]> {
+  'use server';
   // Retrieve slugs from post routes
   const slugs = (
     await readdir('./src/app/blog/(posts)', { withFileTypes: true })
