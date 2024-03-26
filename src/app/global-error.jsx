@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import * as Sentry from "@sentry/nextjs";
-import Error from "next/error";
-import { useEffect } from "react";
+import * as Sentry from '@sentry/nextjs';
+import Error from 'next/error';
+import { useEffect } from 'react';
 
+// eslint-disable-next-line react/prop-types
 export default function GlobalError({ error }) {
   useEffect(() => {
     Sentry.captureException(error);
