@@ -1,6 +1,6 @@
 import { readdir } from 'fs/promises';
 import { Category } from './categories';
-import redis from '@/app/redis';
+// import redis from '@/app/redis';
 
 export interface PostData {
   category: Category;
@@ -18,16 +18,16 @@ export async function getPosts(): Promise<PostData[]> {
     await readdir('./src/app/blog/(posts)', { withFileTypes: true })
   ).filter((dirent) => dirent.isDirectory());
 
-  const redisKeys = slugs.map(({ name }) => `post_views:${name}`);
-  const viewCounts: string[] = await redis.mget(...redisKeys);
+  // const redisKeys = slugs.map(({ name }) => `post_views:${name}`);
+  // const viewCounts: string[] = await redis.mget(...redisKeys);
 
   // Retrieve metadata from MDX files
   const posts: PostData[] = await Promise.all(
-    slugs.map(async ({ name }, index) => {
-      const viewCount = parseInt(viewCounts[index]) || 0;
+    slugs.map(async ({ name }) => {
+      // const viewCount = parseInt(viewCounts[index]) || 0;
 
       const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
-      return { slug: name, slugs: slugs, views: viewCount, ...metadata };
+      return { slug: name, slugs: slugs, views: 0, ...metadata };
     })
   );
 
