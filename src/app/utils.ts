@@ -10,7 +10,9 @@ export const formatDate = (defaultDate: string) => {
 };
 
 export const formatViews = (number: number) => {
-  let formattedNumber = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  let viewsText = number === 1 ? ' view' : ' views'; // Checks if the number is 1 to decide between 'view' and 'views'
+  const formattedNumber = number
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const viewsText = number === 1 ? ' view' : ' views'; // Checks if the number is 1 to decide between 'view' and 'views'
   return formattedNumber + viewsText;
 };

@@ -21,7 +21,7 @@ const ContactForm = () => {
     try {
       const response = await fetch('/api/contact', {
         method: 'post',
-        // @ts-ignore
+        // @ts-expect-error allow search params
         body: new URLSearchParams(data),
       });
       console.log(response);

@@ -18,13 +18,13 @@ interface RoleType {
 }
 
 function Role({ role }: { role: RoleType }) {
-  let startLabel =
+  const startLabel =
     typeof role.start === 'string' ? role.start : role.start.label;
-  let startDate =
+  const startDate =
     typeof role.start === 'string' ? role.start : role.start.dateTime;
 
-  let endLabel = typeof role.end === 'string' ? role.end : role.end.label;
-  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime;
+  const endLabel = typeof role.end === 'string' ? role.end : role.end.label;
+  const endDate = typeof role.end === 'string' ? role.end : role.end.dateTime;
 
   return (
     <li className='flex gap-4'>
@@ -55,7 +55,7 @@ function Role({ role }: { role: RoleType }) {
 }
 
 function Resume() {
-  let resume: Array<RoleType> = [
+  const resume: Array<RoleType> = [
     {
       company: 'Grayce',
       title: 'Software Engineer',
