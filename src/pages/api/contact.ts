@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 const sdk = new SuperfaceClient({
   sdkAuthToken: process.env.SUPERFACE_API_KEY,
