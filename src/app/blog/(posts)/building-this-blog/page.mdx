@@ -1,0 +1,363 @@
+export const metadata = {
+  category: 'Tech',
+  date: '2024-03-11',
+  title: 'Building This blog',
+};
+
+Welcome to my blog! This first post will be an intro into how it was built using a techstack I wanted to learn more about, namely the app router in [Next.js](https://nextjs.org/) and [MDX](https://mdxjs.com/). These two tools pair very well together, even having their own [official docs](https://nextjs.org/docs/app/building-your-application/configuring/mdx). This is great, but their isn't too much on how to use the [@next/mdx](https://www.npmjs.com/package/@next/mdx) to make a functioning app, so we are going to walk through how I made a blog with it.
+
+## Initial setup
+
+To get started, lets install all the MDX dependencies into our Next.js app.
+
+```
+npm install @next/mdx @mdx-js/loader @mdx-js/react
+npm install -D @types/mdx
+```
+
+Then inside your next.config.mjs file, use MDX:
+
+```
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Configure `pageExtensions`` to include MDX files
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  // Optionally, add any other Next.js config below
+};
+
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+  options: {
+    remarkPlugins: [
+      // Adds support for GitHub Flavored Markdown
+      remarkGfm,
+      // generates a table of contents based on headings
+      remarkToc,
+    ],
+    rehypePlugins: [rehypeSlug, rehypeAccessibleEmojis, rehypeAutolinkHeadings],
+  },
+});
+
+export default withMDX(nextConfig)
+```
+
+Finally, you’ll need to create src/mdx-components.tsx with the following:
+
+```
+import type { MDXComponents } from 'mdx/types';
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+  };
+}
+```
+
+<Caption>
+  Your project may not have a src directory! If you don't have this, think of
+  src as the root directory.
+</Caption>
+
+This is where you’ll define your custom MDX components, but we’ll get into that later!
+
+## Adding posts
+
+At this point, we have MDX support in our project and we can start making `.mdx` pages. The way I structured this is by using [Route Groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups) which helps standardize the layout of our posts without affecting routes.
+
+To make a first post, the directory structure should look like this:
+
+```
+src/
+└── app/
+    └── blog/
+        └── (posts)/
+            └── first-post/
+                └── page.mdx
+```
+
+You can now access this post at the `/blog/first-post` route. You can add some content to this post by writing `mdx`.
+
+```
+# My first post
+
+Welcome everyone!
+```
+
+Great! Now we have our first post with some content in it.
+
+## Adding metadata
+
+Next.js has a [Metadata API](https://nextjs.org/docs/app/building-your-application/optimizing/metadata) that lets you define your application metadata to improve SEO and web functionality. You can add more, but for now we will add a title, date and category.
+
+```
+export const metadata = {
+  category: 'Travel',
+  date: '2024-03-15',
+  title: 'My first post',
+};
+```
+
+You will see that the page title becomes "My first post" because Next.js has [metadata fields](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields) that are read automatically from this object.
+
+## Customizing MDX components
+
+From here, there may be some cases where you want to customize components rendered in your blog. To do this, you can override the [default components](https://mdxjs.com/table-of-components/) MDX provides. In this example we will override the `<p>` tag to use tailwindcss styles used throughout the rest of the app.
+
+```
+import { ReactNode } from 'react';
+
+export const P = ({ children }: { children?: ReactNode }) => {
+  return <p className='my-5 [blockquote_&]:my-2'>{children}</p>;
+};
+
+```
+
+We can then import this into `src/mdx-components.tsx` and use it as the `<p>` component.
+
+```
+import { P as p } from './components/p';
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+    p
+  };
+}
+```
+
+## Displaying our posts
+
+Now we need a place that displays all the posts we've created. Since we are using server components, we can access our MDX files directly from the `(posts)` directory. This was a breakthrough moment of using the app router, it made this so simple! We will display the posts under the directory `src/app/blog/page.tsx`.
+
+Lets create a utility file that defines our post type and gets all our posts. Create a file `src/lib/posts.ts` and define this type:
+
+```
+export interface PostData {
+  category: Category;
+  date: string;
+  slug: string;
+  title: string;
+}
+```
+
+In the same file, we will make a util function to get all the posts:
+
+```
+export async function getPosts(): Promise<PostData[]> {
+  'use server';
+
+  const postsDirectory = path.join(process.cwd(), 'src/app/blog/(posts)');
+  const slugs = (await readdir(postsDirectory, { withFileTypes: true }))
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+
+  // Retrieve metadata from MDX files
+  const posts: PostData[] = await Promise.all(
+    slugs.map(async (name, index) => {
+      const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
+      return { slug: name, ...metadata };
+    })
+  );
+
+  // Sort posts from newest to oldest
+  posts.sort((a, b) => +new Date(b.date) - +new Date(a.date));
+
+  return posts;
+}
+```
+
+This function, `getPosts`, asynchronously fetches metadata for blog posts stored as MDX files in a specific directory, and returns an array of PostData objects sorted from newest to oldest. It first lists directories within a specified path that represent individual posts, then imports each post's metadata from its page.mdx file, and finally sorts these posts based on their date metadata.
+
+We can then get the posts and render a description in `src/app/blog/page.tsx`
+
+```
+import { getPosts } from '@/lib/posts';
+
+export default async function Home() {
+  const posts = await getPosts();
+
+  return (
+    <main>
+      <h1>My Blog</h1>
+      {posts.map(({ slug, title, date, category }) => (
+        <li key={slug}>
+          <h2>
+            <Link href={`/blog/${slug}`}>{title}</Link>
+          </h2>
+          <p>
+            <strong>Published:</strong>{' '}
+            {new Date(date).toLocaleDateString()}{' '}
+            <strong>Category:</strong>{' '}
+            {category}
+          </p>
+        </li>
+      ))}
+    </main>
+  );
+}
+```
+
+Of course, you can style this however seems fit.
+
+## Validating Pre-rendering
+
+To test it out:
+
+1. **Disable JavaScript in your browser:** This simulates how a search engine views your site.
+2. **Navigate to your blog:** If everything renders correctly without JavaScript, it's a good sign that Next.js has done its job well.
+
+### Implementing View Count with Redis
+
+If you want to add a view count, Redis is a great way to implement a low weight solution that works smoothly. Using upstash makes this process so easy. First sign up and create a database. We will call this `blog views`. From here, get copy your rest token and rest URL into your environment variables file `.env.local` as `UPSTASH_REDIS_REST_TOKEN` and `UPSTASH_REDIS_REST_URL`. We also want to install the upstash dependency:
+
+```
+ npm i @upstash/redis
+```
+
+We now need to update our post data to include the view count. Firstly, extend the `PostData` to include views
+
+```
+export interface PostData {
+  ...
+  views: number;
+}
+```
+
+Then in our `getPosts()` function, we need to get the views through redis.
+
+```
+...
+import { Redis } from '@upstash/redis';
+
+
+  export async function getPosts(): Promise<PostData[]> {
+  'use server';
+
+  const redis = Redis.fromEnv();
+
+  const postsDirectory = path.join(process.cwd(), 'src/app/blog/(posts)');
+  const slugs = (await readdir(postsDirectory, { withFileTypes: true }))
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+
+  // we can need to get the keys that are saved in redis
+  const redisKeys = slugs.map((name) => `post_views:${name}`);
+
+  // then we can get all these keys in one redis mget query
+  const viewCounts: string[] = await redis.mget(redisKeys);
+
+  const posts: PostData[] = await Promise.all(
+    slugs.map(async (name, index) => {
+      // Get the views for the specific slug
+      const viewCount = parseInt(viewCounts[index]) || 0;
+
+      const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
+      return { slug: name, views: viewCount, ...metadata };
+    })
+  );
+
+  // Sort posts from newest to oldest
+  posts.sort((a, b) => +new Date(b.date) - +new Date(a.date));
+
+  return posts;
+}
+```
+
+The last step is to implement a view counter every time someone visits a blog post. Create a file `src/app/blog/(posts)/layout.tsx`. This is where we can add specific code that renders for each post. We will make a header component, that increments views and displays the blog posts title and date. Create this component `src/app/blog/(posts)/header.tsx` and render it in the layout component. Here is how my component looks:
+
+```
+'use client';
+
+import { useSelectedLayoutSegments } from 'next/navigation';
+import { useEffect, useRef } from 'react';
+import TimeAgo from 'javascript-time-ago';
+
+import type { PostData } from '@/lib/posts';
+
+import en from 'javascript-time-ago/locale/en';
+import { createView } from '../serverActions';
+
+TimeAgo.addDefaultLocale(en);
+
+const Header = ({ posts }: { posts: PostData[] }) => {
+  const segments = useSelectedLayoutSegments();
+
+  const post = posts.find(
+    (post) => post.slug === segments[segments.length - 1]
+  );
+
+  const timeAgo = new TimeAgo('en-US');
+
+  if (post == null) return <></>;
+
+  return (
+    <>
+      <h1 className='mb-1 text-2xl font-bold dark:text-gray-100'>
+        {post.title}
+      </h1>
+
+      <p className='mt-2 flex text-xs text-gray-500 dark:text-gray-500'>
+        <span className='flex-grow'>
+          <span suppressHydrationWarning={true}>
+            {post.date} ({timeAgo.format(new Date(post.date))})
+          </span>
+        </span>
+
+        <span className='pr-1.5'>
+          <Views slug={post.slug} defaultValue={post.views} />
+        </span>
+      </p>
+    </>
+  );
+};
+
+export default Header;
+
+const Views = ({
+  slug,
+  defaultValue,
+}: {
+  slug: string;
+  defaultValue: number;
+}) => {
+  const views = defaultValue;
+  const didLogViewRef = useRef(false);
+
+  useEffect(() => {
+    if (!didLogViewRef.current) {
+      createView(slug);
+      didLogViewRef.current = true;
+    }
+  });
+
+  return <>{views != null ? <span>{views} views</span> : null}</>;
+};
+```
+
+Note that we marked this as a client rendered component. This is crutial for being able to use hooks. We use a handy Next.js hook called [useSelectedLayoutSegments](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments) which lets us get the active route segment, which is the slug of the article. We can use this to find the data of the post from all the posts. Then we make a `View` component that counts and displays the current views. Note this calls a server action called `createView`. We can make that serverAction which increments the redis database at `src/app/blog/serverActions.ts`:
+
+```
+'use server';
+
+import { Redis } from '@upstash/redis';
+
+import { revalidateTag } from 'next/cache';
+
+// This function increments the view count for a given post
+export async function createView(postSlug: string): Promise<void> {
+  const redis = Redis.fromEnv();
+
+  // Increment the view count in Redis using the post's slug
+  await redis.incr(`post_views:${postSlug}`);
+  // Revalidate the post cache, if you're using ISR or similar caching strategies
+  revalidateTag('posts');
+}
+```
+
+Nice! Now we should have a view count that correctly shows how many views the post has. Remember, if you deploy this you will need to add the environment variables to your hosted environment.
+
+## Final Thoughts
+
+And there you have it, a fully functioning blog in Next.js powered by MDX. To recap, we learned how to set up MDX, add posts and metadata, define custom components, list all of our posts, add categories to our posts, and add a view count!
+
+Till next time, happy coding!

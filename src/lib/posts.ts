@@ -1,15 +1,12 @@
 import { readdir } from 'fs/promises';
 import { Category } from './categories';
 import { Redis } from '@upstash/redis';
-import { captureException } from '@sentry/nextjs';
 import path from 'path';
 
 export interface PostData {
   category: Category;
-  content: string;
   date: string;
   slug: string;
-  slugs: { name: string }[];
   title: string;
   views: number;
 }
@@ -26,21 +23,15 @@ export async function getPosts(): Promise<PostData[]> {
 
   const redisKeys = slugs.map((name) => `post_views:${name}`);
 
-  let viewCounts: string[] = [];
-  try {
-    viewCounts = await redis.mget(redisKeys);
-    // Additional code to handle the case when viewCounts contains null or unexpected values
-  } catch (error) {
-    captureException(error);
-    throw error; // Re-throw the error after capturing it with Sentry
-  }
+  const viewCounts: string[] = await redis.mget(redisKeys);
+
   // Retrieve metadata from MDX files
   const posts: PostData[] = await Promise.all(
     slugs.map(async (name, index) => {
       const viewCount = parseInt(viewCounts[index]) || 0;
 
       const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
-      return { slug: name, slugs: slugs, views: viewCount, ...metadata };
+      return { slug: name, views: viewCount, ...metadata };
     })
   );
 

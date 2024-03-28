@@ -13,9 +13,7 @@ TimeAgo.addDefaultLocale(en);
 
 const Header = ({ posts }: { posts: PostData[] }) => {
   const segments = useSelectedLayoutSegments();
-  // segments can be:
-  // date/post
-  // lang/date/post
+
   const post = posts.find(
     (post) => post.slug === segments[segments.length - 1]
   );
@@ -38,10 +36,6 @@ const Header = ({ posts }: { posts: PostData[] }) => {
             <span className='mx-2'>|</span>
           </span>
 
-          {/* since we will pre-render the relative time, over time it
-           * will diverge with what the user relative time is, so we suppress the warning.
-           * In practice this is not an issue because we revalidate the entire page over time
-           * and because we will move this to a server component with template.tsx at some point */}
           <span suppressHydrationWarning={true}>
             {post.date} ({timeAgo.format(new Date(post.date))})
           </span>

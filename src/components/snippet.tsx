@@ -1,24 +1,25 @@
-import { Caption } from './caption';
+'use client';
 
-export const Snippet = ({ children, scroll = true, caption = null }: any) => (
-  <div className='my-6'>
-    <pre
-      className={`
-      bg-gray-800
-      p-4
-      text-sm text-white
-      dark:bg-[#222] dark:text-gray-300
+import { useEffect } from 'react';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github-dark.css'; // Theme choice
 
-      ${
-        scroll
-          ? 'overflow-scroll'
-          : 'overflow-hidden whitespace-pre-wrap break-all'
-      }
-    `}
-    >
-      <code>{children}</code>
+const CodeSnippet = ({
+  code,
+  language,
+}: {
+  code: string;
+  language: string;
+}) => {
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
+
+  return (
+    <pre>
+      <code className={language}>{code}</code>
     </pre>
+  );
+};
 
-    {caption != null ? <Caption>{caption}</Caption> : null}
-  </div>
-);
+export default CodeSnippet;
