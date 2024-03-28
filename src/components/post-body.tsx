@@ -9,7 +9,7 @@ import { LI as li } from './li';
 import { HR as hr } from './hr';
 import { Code as code } from './code';
 import { Image } from './image';
-import { Snippet } from './snippet';
+import Snippet from './snippet';
 import { Caption } from './caption';
 import { Blockquote as blockquote } from './blockquote';
 
