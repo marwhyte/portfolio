@@ -41,7 +41,7 @@ const withMDX = createMDX({
 export default withMDX(nextConfig)
 ```
 
-Finally, you’ll need to create src/mdx-components.tsx with the following:
+Finally, you’ll need to create a file `src/mdx-components.tsx` with the following:
 
 ```
 import type { MDXComponents } from 'mdx/types';
@@ -57,8 +57,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   Your project may not have a src directory! If you don't have this, think of
   src as the root directory.
 </Caption>
-
-This is where you’ll define your custom MDX components, but we’ll get into that later!
+This is where you can define your custom MDX components, but we’ll get into that
+later.
 
 ## Adding posts
 
@@ -144,8 +144,6 @@ In the same file, we will make a util function to get all the posts:
 
 ```
 export async function getPosts(): Promise<PostData[]> {
-  'use server';
-
   const postsDirectory = path.join(process.cwd(), 'src/app/blog/(posts)');
   const slugs = (await readdir(postsDirectory, { withFileTypes: true }))
     .filter((dirent) => dirent.isDirectory())
@@ -208,13 +206,13 @@ To test it out:
 
 ### Implementing View Count with Redis
 
-If you want to add a view count, Redis is a great way to implement a low weight solution that works smoothly. Using upstash makes this process so easy. First sign up and create a database. We will call this `blog views`. From here, get copy your rest token and rest URL into your environment variables file `.env.local` as `UPSTASH_REDIS_REST_TOKEN` and `UPSTASH_REDIS_REST_URL`. We also want to install the upstash dependency:
+If you want to add a view count, Redis is a great way to implement a low weight solution that works smoothly. Using [Upstash](https://upstash.com/) makes this process so easy. First sign up and create a database. We will call this `blog views`. From here, copy your rest token and rest URL into your environment variables file `.env.local` as `UPSTASH_REDIS_REST_TOKEN` and `UPSTASH_REDIS_REST_URL`. We also want to install the upstash redis dependency:
 
 ```
  npm i @upstash/redis
 ```
 
-We now need to update our post data to include the view count. Firstly, extend the `PostData` to include views
+We now need to update our post data to include the view count. Firstly, extend the `PostData` type to include views
 
 ```
 export interface PostData {
@@ -231,8 +229,6 @@ import { Redis } from '@upstash/redis';
 
 
   export async function getPosts(): Promise<PostData[]> {
-  'use server';
-
   const redis = Redis.fromEnv();
 
   const postsDirectory = path.join(process.cwd(), 'src/app/blog/(posts)');
@@ -240,23 +236,23 @@ import { Redis } from '@upstash/redis';
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
-  // we can need to get the keys that are saved in redis
+  // Make the key strings that are saved in redis
   const redisKeys = slugs.map((name) => `post_views:${name}`);
 
-  // then we can get all these keys in one redis mget query
+  // Make a single redis mget query that gets values for all the keys
   const viewCounts: string[] = await redis.mget(redisKeys);
 
   const posts: PostData[] = await Promise.all(
     slugs.map(async (name, index) => {
-      // Get the views for the specific slug
+      // Get the views for the specific post slug
       const viewCount = parseInt(viewCounts[index]) || 0;
 
       const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
+      // Return that view count value
       return { slug: name, views: viewCount, ...metadata };
     })
   );
 
-  // Sort posts from newest to oldest
   posts.sort((a, b) => +new Date(b.date) - +new Date(a.date));
 
   return posts;
@@ -334,7 +330,7 @@ const Views = ({
 };
 ```
 
-Note that we marked this as a client rendered component. This is crutial for being able to use hooks. We use a handy Next.js hook called [useSelectedLayoutSegments](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments) which lets us get the active route segment, which is the slug of the article. We can use this to find the data of the post from all the posts. Then we make a `View` component that counts and displays the current views. Note this calls a server action called `createView`. We can make that serverAction which increments the redis database at `src/app/blog/serverActions.ts`:
+Note that we marked this as a client rendered component. This is necessary for being able to use [React hooks](https://react.dev/reference/react/hooks). We use a handy Next.js hook called [useSelectedLayoutSegments](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments) which lets us get the active route segment, which is the slug of the post. We can use this to find the correct data of the current post from all the posts data. Then we make a `View` component that counts and displays the current views. Note this calls a server action called `createView`. We can make that serverAction which increments the redis database at `src/app/blog/serverActions.ts`:
 
 ```
 'use server';
@@ -358,6 +354,6 @@ Nice! Now we should have a view count that correctly shows how many views the po
 
 ## Final Thoughts
 
-And there you have it, a fully functioning blog in Next.js powered by MDX. To recap, we learned how to set up MDX, add posts and metadata, define custom components, list all of our posts, add categories to our posts, and add a view count!
+And there you have it, a fully functioning blog in Next.js powered by MDX. To recap, we learned how to set up MDX, add posts and metadata, define custom components, list all of our posts, add categories to our posts, and add a view count.
 
 Till next time, happy coding!
