@@ -12,8 +12,6 @@ export interface PostData {
 }
 
 export async function getPosts(): Promise<PostData[]> {
-  'use server';
-
   const redis = Redis.fromEnv();
 
   const postsDirectory = path.join(process.cwd(), 'src/app/blog/(posts)');
