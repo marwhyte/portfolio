@@ -1,12 +1,10 @@
-.embla {
-  max-width: 48rem;
-  margin: auto;
+:root {
   --brand-primary: rgb(47, 112, 193);
   --brand-secondary: rgb(116, 97, 195);
   --brand-alternative: rgb(19, 120, 134);
   --background-site: rgb(249, 249, 249);
   --background-code: rgb(244, 244, 244);
-  --text-body: rgb(54, 49, 61);
+  --text-body: rgb(0, 231, 158);
   --text-comment: rgb(99, 94, 105);
   --text-high-contrast: rgb(49, 49, 49);
   --text-medium-contrast: rgb(99, 94, 105);
@@ -33,6 +31,11 @@
   --admonition-note-rgb-value: 46, 109, 188;
   --admonition-warning-rgb-value: 255, 196, 9;
   --admonition-danger-rgb-value: 220, 38, 38;
+}
+
+.embla {
+  max-width: 48rem;
+  margin: auto;
   --slide-height: 32rem;
   --slide-spacing: 1rem;
   --slide-size: 80%;
@@ -136,7 +139,7 @@
   content: '';
 }
 .embla__dot--selected:after {
-  box-shadow: inset 0 0 0 0.2rem var(--text-body);
+  box-shadow: inset 0 0 0 0.1rem var(--text-body);
 }
 .embla__parallax {
   border-radius: 1.8rem;
