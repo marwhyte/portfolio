@@ -6,6 +6,7 @@ import path from 'path';
 export interface PostData {
   category: Category;
   date: string;
+  images: string[];
   slug: string;
   title: string;
   views: number;

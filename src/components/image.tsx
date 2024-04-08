@@ -1,3 +1,5 @@
+import NextImage from 'next/image';
+
 export const Image = ({
   src,
   alt: originalAlt,
@@ -5,5 +7,12 @@ export const Image = ({
   src?: string;
   alt?: string;
 }) => {
-  return <img src={src} alt={originalAlt ?? ''} />;
+  return (
+    <NextImage
+      width={1000}
+      height={1000}
+      src={src ?? ''}
+      alt={originalAlt ?? ''}
+    />
+  );
 };

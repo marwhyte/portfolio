@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import Header from './header';
 import { getPosts } from '@/lib/posts';
+import Gallery from './gallery';
 
 export default async function PostsLayout({
   children,
@@ -22,6 +23,7 @@ export default async function PostsLayout({
         Go Back
       </Link>
       {children}
+      <Gallery posts={posts} />
     </div>
   );
 }
