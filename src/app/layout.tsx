@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import './gallery.css';
 import { Providers } from './providers';
 import { ReactNode } from 'react';
 import Header from './components/header';
