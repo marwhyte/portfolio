@@ -306,7 +306,16 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
 
   if (!post?.images.length) return <></>;
 
-  return <EmblaCarousel post={post} options={{}} />;
+  return (
+    <div className='mt-8'>
+      <h2 className='mb-4'>
+        <span className='inline-block bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 bg-clip-text text-3xl font-bold tracking-tight text-transparent'>
+          Gallery
+        </span>
+      </h2>
+      <EmblaCarousel post={post} options={{}} />
+    </div>
+  );
 };
 
 export default Gallery;
