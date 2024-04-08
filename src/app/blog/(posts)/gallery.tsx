@@ -252,6 +252,7 @@ const EmblaCarousel = ({ post, options }: CarouselPropType) => {
       .on('reInit', setTweenFactor)
       .on('reInit', tweenParallax)
       .on('scroll', tweenParallax);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emblaApi, tweenParallax]);
 
   return (
