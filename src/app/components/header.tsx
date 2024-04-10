@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className='sticky top-0 z-50 bg-transparent'>
+    <header className='sticky top-0 z-40 bg-transparent'>
       <nav
         className={`mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8 ${hasScrolledDown ? 'bg-white shadow-sm transition-all duration-300 ease-in-out dark:bg-gray-900 lg:!bg-transparent lg:shadow-none' : ''}`}
         aria-label='Global'
@@ -74,8 +74,8 @@ const Header = () => {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
       >
-        <div className='fixed inset-0 z-50' />
-        <Dialog.Panel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
+        <div className='fixed inset-0 z-40' />
+        <Dialog.Panel className='fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
           <div className='flex items-center gap-x-6'>
             <div className='flex items-center justify-center gap-x-6'>
               <SocialIcons />

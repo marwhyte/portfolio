@@ -26,6 +26,14 @@ const config: Config = {
         },
       },
     },
+    height: {
+      '70v': '70vh',
+      '80v': '80vh',
+      '90v': '90vh',
+    },
+    zIndex: {
+      '100': '100',
+    },
   },
   plugins: [
     new MiniCssExtractPlugin(),
