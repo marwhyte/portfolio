@@ -72,13 +72,13 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
         {post.images.map((image) => {
           return (
             <button
+              key={image}
               onClick={() => setSelectedImage(image)}
               className='after:content after:shadow-highlight group relative mb-5 block flex w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg'
             >
               <Image
                 className='transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110'
                 alt='image alt'
-                key={image}
                 src={`/${post.slug}/${image}`}
                 width={500}
                 height={500}
