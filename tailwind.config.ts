@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const config: Config = {
   content: [
