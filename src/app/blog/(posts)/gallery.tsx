@@ -22,7 +22,7 @@ const Modal = ({
       open={false}
       onClose={onClose}
       //   initialFocus={overlayRef}
-      className='fixed inset-0 z-50 flex items-center justify-center'
+      className='z-120 fixed inset-0 flex items-center justify-center'
     >
       <Dialog.Overlay
         // ref={overlayRef}
