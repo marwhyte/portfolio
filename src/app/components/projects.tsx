@@ -26,7 +26,7 @@ const Projects = () => {
               <Card.Link href={project.link.href}>{project.name}</Card.Link>
             </h2>
             <Card.Description>{project.description}</Card.Description>
-            <p className='relative z-10 mt-6 flex text-sm font-medium text-gray-400 transition group-hover:text-teal-500 dark:text-gray-200'>
+            <p className='relative mt-6 flex text-sm font-medium text-gray-400 transition group-hover:text-teal-500 dark:text-gray-200'>
               <LinkIcon className='h-6 w-6 flex-none' />
               <span className='ml-2'>{project.link.label}</span>
             </p>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export function A({ children, className = '', href, ...props }: any) {
-  if (href[0] === '#') {
+  if (href[0] === '#' || href[0] === '/') {
     return (
       <a
         href={href}

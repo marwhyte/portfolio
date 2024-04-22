@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className='sticky top-0 z-40 bg-transparent'>
+    <header className='z-110 sticky top-0 bg-transparent'>
       <nav
         className={`mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8 ${hasScrolledDown ? 'bg-white shadow-sm transition-all duration-300 ease-in-out dark:bg-gray-900 lg:!bg-transparent lg:shadow-none' : ''}`}
         aria-label='Global'
