@@ -12,6 +12,15 @@ import { createView } from '../serverActions';
 TimeAgo.addDefaultLocale(en);
 
 const Header = ({ posts }: { posts: PostData[] }) => {
+  useEffect(
+    () =>
+      window.document.scrollingElement?.scrollTo({
+        behavior: 'instant',
+        top: 0,
+      }),
+    []
+  );
+
   const segments = useSelectedLayoutSegments();
 
   const post = posts.find(
