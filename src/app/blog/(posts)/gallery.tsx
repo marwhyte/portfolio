@@ -21,15 +21,11 @@ const Modal = ({
       static
       open={false}
       onClose={onClose}
-      //   initialFocus={overlayRef}
-      className='z-120 fixed inset-0 flex items-center justify-center'
+      className='fixed inset-0 z-120 flex items-center justify-center'
     >
       <Dialog.Overlay
-        // ref={overlayRef}
         key='backdrop'
         className='fixed inset-0 bg-white bg-opacity-75 transition-opacity dark:bg-gray-900'
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1 }}
       />
       <div className='z-100 flex items-center'>
         <img
@@ -37,7 +33,7 @@ const Modal = ({
           src={`/${post.slug}/${image}`}
           alt='image'
         />
-        <div className='z-100 absolute left-5 top-5 flex items-center gap-2 p-3 text-white'>
+        <div className='absolute left-5 top-5 z-100 flex items-center gap-2 p-3 text-white'>
           <button
             onClick={() => onClose()}
             className='rounded-full bg-black/50 p-2 text-white/75 transition hover:bg-black/75 hover:text-white'
@@ -78,7 +74,7 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
             >
               <Image
                 className='transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110'
-                alt='image alt'
+                alt={image.split('.')[0].replaceAll('-', ' ')}
                 src={`/${post.slug}/${image}`}
                 width={500}
                 height={500}
