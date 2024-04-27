@@ -16,7 +16,7 @@ export default async function PostsLayout({
     <div className='mx-auto mt-16 max-w-2xl px-2 lg:px-8'>
       <Header posts={posts} />
       <Link
-        className='absolute mb-16 flex translate-y-[-100px] items-center gap-1 text-sm text-gray-500 hover:!text-teal-500 dark:text-gray-300 lg:translate-x-[-200px]'
+        className='absolute mb-16 flex translate-y-[-150px] items-center gap-1 text-sm text-gray-500 hover:!text-teal-500 dark:text-gray-300 lg:translate-x-[-200px]'
         href='/blog'
       >
         <ChevronLeftIcon className='bold h-4 w-4 ' />
