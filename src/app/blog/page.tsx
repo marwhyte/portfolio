@@ -2,7 +2,6 @@ import { PostData, getPosts } from '@/lib/posts';
 import Card from '../components/card';
 import { formatDate, formatViews } from '../utils';
 import { H1 } from '../../components/h1';
-import { Suspense } from 'react';
 
 const Post = ({ post }: { post: PostData }) => {
   return (
@@ -61,9 +60,7 @@ export default async function Blog() {
           Learn more about my projects, work and personal life.
         </p>
       </div>
-      <Suspense fallback={<div />}>
-        <Posts posts={posts} />
-      </Suspense>
+      <Posts posts={posts} />
     </div>
   );
 }
