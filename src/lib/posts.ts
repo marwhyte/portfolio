@@ -5,6 +5,7 @@ import path from 'path';
 
 export interface PostData {
   category: Category;
+  countryCode?: string;
   date: string;
   images: string[];
   slug: string;
