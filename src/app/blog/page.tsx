@@ -2,6 +2,7 @@ import { PostData, getPosts } from '@/lib/posts';
 import Card from '../components/card';
 import { formatDate, formatViews } from '../utils';
 import { H1 } from '../../components/h1';
+import ReactCountryFlag from 'react-country-flag';
 
 const Post = ({ post }: { post: PostData }) => {
   return (
@@ -10,9 +11,27 @@ const Post = ({ post }: { post: PostData }) => {
       <article className='md:grid md:grid-cols-4 md:items-baseline'>
         <Card className='md:col-span-3'>
           <div className='flex w-full justify-between'>
-            <Card.Title href={`/blog/${post.slug}`}>{post.title}</Card.Title>
+            <div>
+              <Card.Title href={`/blog/${post.slug}`}>
+                {post.countryCode && (
+                  <ReactCountryFlag
+                    className='mr-2 inline'
+                    countryCode={post.countryCode}
+                    svg
+                    style={{
+                      marginTop: '-2px',
+                      width: '1.2em',
+                      height: '1.2em',
+                    }}
+                    title={post.countryCode}
+                  />
+                )}
+                {post.title}
+              </Card.Title>
+            </div>
             <div className='-mt-9 md:-mt-1'>
               <Card.Category>{post.category}</Card.Category>
+
               <div className='mt-2 text-center'>
                 <span className='relative z-10 text-xs !text-gray-400 dark:!text-gray-400'>
                   {formatViews(post.views)}
