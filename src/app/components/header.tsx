@@ -10,8 +10,8 @@ const Header = () => {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Blog', href: '/blog' },
-    { name: 'My work', href: '#work' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'My work', href: '/#work' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,13 +31,13 @@ const Header = () => {
   }, []);
 
   return (
-    <header className='z-110 sticky top-0 bg-transparent'>
+    <header className='sticky top-0 z-110 bg-transparent'>
       <nav
         className={`mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8 ${hasScrolledDown ? 'bg-white shadow-sm transition-all duration-300 ease-in-out dark:bg-gray-900 lg:!bg-transparent lg:shadow-none' : ''}`}
         aria-label='Global'
       >
         <div className='flex lg:flex-1'>
-          <a href='#' className='-m-1.5 p-1.5'>
+          <a href='/#' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Marco Whyte</span>
           </a>
         </div>

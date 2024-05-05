@@ -40,7 +40,7 @@ const Hero = () => {
               <SocialIcons />
             </div>
             <div className='mt-8 flex animate-bounce items-center justify-center gap-x-6 lg:mt-24'>
-              <Button variant='tertiary' href='#skills'>
+              <Button variant='tertiary' href='/#skills'>
                 <ArrowDownCircleIcon className='h-6 w-6' />
               </Button>
             </div>
