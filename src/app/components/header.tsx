@@ -74,8 +74,8 @@ const Header = () => {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
       >
-        <div className='fixed inset-0 z-40' />
-        <Dialog.Panel className='fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
+        <div className='fixed inset-0 z-120' />
+        <Dialog.Panel className='fixed inset-y-0 right-0 z-120 w-full overflow-y-auto bg-white px-6 py-6 dark:bg-gray-900 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
           <div className='flex items-center gap-x-6'>
             <div className='flex items-center justify-center gap-x-6'>
               <SocialIcons />
