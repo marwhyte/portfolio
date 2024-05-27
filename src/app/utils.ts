@@ -13,6 +13,6 @@ export const formatViews = (number: number) => {
   const formattedNumber = number
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  const viewsText = number === 1 ? ' view' : ' views'; // Checks if the number is 1 to decide between 'view' and 'views'
+  const viewsText = number === 1 ? ' view' : ' views';
   return formattedNumber + viewsText;
 };
