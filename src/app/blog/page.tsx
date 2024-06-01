@@ -7,7 +7,7 @@ import ReactCountryFlag from 'react-country-flag';
 const Post = ({ post }: { post: PostData }) => {
   return (
     <>
-      <div className='h-3 absolute flex hidden w-3 -translate-x-[30.5px] translate-y-[7px] items-center justify-center rounded-full border border-gray-300 bg-white  dark:border-gray-400 dark:bg-gray-900 md:block' />
+      <div className='h-3 absolute flex hidden w-3 -translate-x-[30.5px] translate-y-[11px] items-center justify-center rounded-full border border-gray-300 bg-white  dark:border-gray-400 dark:bg-gray-900 md:block' />
       <article className='md:grid md:grid-cols-4 md:items-baseline'>
         <Card className='md:col-span-3'>
           <div className='flex w-full justify-between'>
