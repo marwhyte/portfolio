@@ -7,7 +7,7 @@ import modernizeMeLogo from '../../public/modernize-me-logo.png';
 import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
 import Image, { type ImageProps } from 'next/image';
 import Skills from './components/skills';
-import ContactForm from './components/contact-form';
+// import ContactForm from './components/contact-form';
 
 interface RoleType {
   company: string;
@@ -28,7 +28,7 @@ function Role({ role }: { role: RoleType }) {
 
   return (
     <li className='flex gap-4'>
-      <div className='relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 dark:border dark:border-gray-700/50 dark:bg-gray-800 dark:ring-0'>
+      <div className='h-10 relative mt-1 flex w-10 flex-none items-center justify-center rounded-full shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 dark:border dark:border-gray-700/50 dark:bg-gray-800 dark:ring-0'>
         <Image src={role.logo} alt='' className='h-7 w-7' unoptimized />
       </div>
       <dl className='flex flex-auto flex-wrap gap-x-2'>
@@ -115,7 +115,7 @@ export default function Home() {
             <Projects />
           </div>
           <div className='mb-24 space-y-10 lg:pl-16 xl:pl-24'>
-            <ContactForm />
+            {/* <ContactForm /> */}
             <Resume />
           </div>
         </div>
