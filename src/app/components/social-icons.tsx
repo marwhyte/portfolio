@@ -34,7 +34,7 @@ type IconLinkProps = {
   href: string;
 };
 
-const IconLink = ({ icon: Icon, ...props }: IconLinkProps) => {
+export const IconLink = ({ icon: Icon, ...props }: IconLinkProps) => {
   return (
     <Link
       className='group -m-1 p-1'
@@ -50,7 +50,7 @@ const IconLink = ({ icon: Icon, ...props }: IconLinkProps) => {
 const SocialIcons = () => {
   return (
     <>
-      <IconLink
+      {/* <IconLink
         icon={GitHubIcon}
         href='https://github.com/marwhyte'
         aria-label='GitHub'
@@ -59,7 +59,7 @@ const SocialIcons = () => {
         icon={LinkedInIcon}
         href='https://www.linkedin.com/in/marco-whyte/'
         aria-label='LinkedIn'
-      />
+      /> */}
     </>
   );
 };

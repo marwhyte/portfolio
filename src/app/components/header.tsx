@@ -11,7 +11,7 @@ const Header = () => {
     { name: 'Home', href: '/' },
     { name: 'Blog', href: '/blog' },
     { name: 'My work', href: '/#work' },
-    { name: 'Contact', href: '/#contact' },
+    // { name: 'Contact', href: '/#contact' },
   ];
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
