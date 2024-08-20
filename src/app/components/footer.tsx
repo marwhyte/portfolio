@@ -24,7 +24,7 @@ const Footer = () => {
                 <NavLink href='/'>Home</NavLink>
                 <NavLink href='/blog'>Blog</NavLink>
                 <NavLink href='/#work'>My work</NavLink>
-                <NavLink href='/#contact'>Contact</NavLink>
+                {/* <NavLink href='/#contact'>Contact</NavLink> */}
               </div>
               <p className='max-w-[400px] px-4 text-center text-sm text-gray-600 dark:text-gray-400 lg:px-0 lg:text-left'>
                 This site was coded by me in{' '}
