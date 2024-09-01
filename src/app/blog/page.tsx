@@ -13,19 +13,21 @@ const Post = ({ post }: { post: PostData }) => {
           <div className='flex w-full justify-between'>
             <div>
               <Card.Title href={`/blog/${post.slug}`}>
-                {post.countryCode && (
-                  <ReactCountryFlag
-                    className='mr-2 inline'
-                    countryCode={post.countryCode}
-                    svg
-                    style={{
-                      marginTop: '-2px',
-                      width: '1.2em',
-                      height: '1.2em',
-                    }}
-                    title={post.countryCode}
-                  />
-                )}
+                {post.countryCodes &&
+                  post.countryCodes.map((countryCode) => (
+                    <ReactCountryFlag
+                      key={countryCode}
+                      className='mr-2 inline'
+                      countryCode={countryCode}
+                      svg
+                      style={{
+                        marginTop: '-2px',
+                        width: '1.2em',
+                        height: '1.2em',
+                      }}
+                      title={countryCode}
+                    />
+                  ))}
                 {post.title}
               </Card.Title>
             </div>

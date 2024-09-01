@@ -5,7 +5,7 @@ import path from 'path';
 
 export interface PostData {
   category: Category;
-  countryCode?: string;
+  countryCodes?: string[];
   date: string;
   images: string[];
   slug: string;
@@ -31,7 +31,14 @@ export async function getPosts(): Promise<PostData[]> {
       const viewCount = parseInt(viewCounts[index]) || 0;
 
       const { metadata } = await import(`../app/blog/(posts)/${name}/page.mdx`);
-      return { slug: name, views: viewCount, ...metadata };
+      return {
+        slug: name,
+        views: viewCount,
+        countryCodes:
+          metadata.countryCodes ??
+          (metadata.countryCode ? [metadata.countryCode] : []),
+        ...metadata,
+      };
     })
   );
 
