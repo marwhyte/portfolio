@@ -1,5 +1,8 @@
 export const formatDate = (defaultDate: string) => {
-  const date = new Date(defaultDate);
+  // Split the date string and create date using local timezone
+  const [year, month, day] = defaultDate.split('-').map(Number);
+  const date = new Date(year, month - 1, day); // month is 0-based in JavaScript
+
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
