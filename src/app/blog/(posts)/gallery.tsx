@@ -29,7 +29,7 @@ const Modal = ({
       />
       <div className='z-100 flex items-center'>
         <img
-          className=' h-70v lg:h-90v'
+          className='max-h-[80vh] max-w-[95vw] object-contain lg:max-h-[90vh] lg:max-w-[1200px]'
           src={`/${post.slug}/${image}`}
           alt='image'
         />
