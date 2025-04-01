@@ -1,6 +1,6 @@
 import Card from './card';
 import graphMakerLogo from '../../../public/graph-maker-logo.png';
-import wandLogo from '../../../public/wand-logo.png';
+import wandIcon from '../../../public/wand-icon.png';
 import Image from 'next/image';
 import { LinkIcon } from '@heroicons/react/20/solid';
 
@@ -11,7 +11,7 @@ const Projects = () => {
       description:
         'wand.email is an easy, drag-and-drop email builder that allows you to create beautiful emails in minutes, not hours. It integrates easily into most tech stacks, including html, react, and nextJS',
       link: { href: 'https://wand.email', label: 'wand.email' },
-      logo: wandLogo,
+      logo: wandIcon,
     },
     {
       name: 'GraphMaker',
