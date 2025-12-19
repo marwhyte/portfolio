@@ -2,6 +2,7 @@ import { BriefcaseIcon } from '@heroicons/react/16/solid';
 import Hero from './components/hero';
 import Projects from './components/projects';
 
+import ziteLogo from '../../public/zite.png';
 import grayceLogo from '../../public/grayce-logo.png';
 import modernizeMeLogo from '../../public/modernize-me-logo.png';
 import connectOurKidsLogo from '../../public/connect-our-kids-logo.png';
@@ -29,7 +30,12 @@ function Role({ role }: { role: RoleType }) {
   return (
     <li className='flex gap-4'>
       <div className='h-10 relative mt-1 flex w-10 flex-none items-center justify-center rounded-full shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 dark:border dark:border-gray-700/50 dark:bg-gray-800 dark:ring-0'>
-        <Image src={role.logo} alt='' className='h-7 w-7' unoptimized />
+        <Image
+          src={role.logo}
+          alt=''
+          className={role.company === 'Zite' ? 'h-5 w-5' : 'h-7 w-7'}
+          unoptimized
+        />
       </div>
       <dl className='flex flex-auto flex-wrap gap-x-2'>
         <dt className='sr-only'>Company</dt>
@@ -56,6 +62,13 @@ function Role({ role }: { role: RoleType }) {
 
 function Resume() {
   const resume: Array<RoleType> = [
+    {
+      company: 'Zite',
+      title: 'Software Engineer',
+      logo: ziteLogo,
+      start: '2024',
+      end: 'Present',
+    },
     {
       company: 'Grayce',
       title: 'Software Engineer',
