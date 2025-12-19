@@ -87,11 +87,18 @@ export const WavyBackground = ({
 
   let animationId: number;
   const render = () => {
+    // Clear the entire canvas first
+    ctx.clearRect(0, 0, w, h);
+
+    // Set background with full opacity first
     const bgColor =
-      resolvedTheme === 'light' ? '#ffffff' : backgroundFill || '#111827';
+      resolvedTheme === 'light' ? '#ffffff' : backgroundFill || '#0f172a';
+    ctx.globalAlpha = 1;
     ctx.fillStyle = bgColor;
-    ctx.globalAlpha = waveOpacity || 0.5;
     ctx.fillRect(0, 0, w, h);
+
+    // Then draw waves with specified opacity
+    ctx.globalAlpha = waveOpacity || 0.5;
     drawWave(5);
     animationId = requestAnimationFrame(render);
   };
