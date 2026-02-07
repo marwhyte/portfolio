@@ -1,9 +1,9 @@
 'use client';
 
 import { PostData } from '@/lib/posts';
+import { cloudinaryImage } from '@/lib/cloudinary';
 import { Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/16/solid';
-import Image from 'next/image';
 import { useSelectedLayoutSegments } from 'next/navigation';
 import { useState } from 'react';
 
@@ -16,6 +16,12 @@ const Modal = ({
   post: PostData;
   onClose: () => void;
 }) => {
+  const imageSrc = cloudinaryImage(`${post.slug}/${image}`, {
+    width: 1200,
+    quality: 'auto',
+    format: 'auto',
+  });
+
   return (
     <Dialog
       static
@@ -30,7 +36,7 @@ const Modal = ({
       <div className='z-100 flex items-center'>
         <img
           className='max-h-[80vh] max-w-[95vw] object-contain lg:max-h-[90vh] lg:max-w-[1200px]'
-          src={`/${post.slug}/${image}`}
+          src={imageSrc}
           alt='image'
         />
         <div className='absolute left-5 top-5 z-100 flex items-center gap-2 p-3 text-white'>
@@ -66,18 +72,23 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
       </h2>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
         {post.images.map((image) => {
+          const imageSrc = cloudinaryImage(`${post.slug}/${image}`, {
+            width: 500,
+            quality: 'auto',
+            format: 'auto',
+          });
+
           return (
             <button
               key={image}
               onClick={() => setSelectedImage(image)}
               className='after:content after:shadow-highlight group relative mb-5 block flex w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg'
             >
-              <Image
+              <img
                 className='transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110'
                 alt={image.split('.')[0].replaceAll('-', ' ')}
-                src={`/${post.slug}/${image}`}
-                width={500}
-                height={500}
+                src={imageSrc}
+                loading='lazy'
               />
             </button>
           );

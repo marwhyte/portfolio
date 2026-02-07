@@ -21,6 +21,7 @@
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "@upstash/redis": "^1.28.4",
+    "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
@@ -37,6 +38,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "remark-toc": "^9.0.0",
+    "sharp": "^0.34.5",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.0.2"
   },
