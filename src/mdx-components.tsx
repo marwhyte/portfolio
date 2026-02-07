@@ -11,6 +11,7 @@ import { LI as li } from './components/li';
 import { HR as hr } from './components/hr';
 import { Code as code } from './components/code';
 import { Image } from './components/image';
+import { Video } from './components/video';
 import Snippet from './components/snippet';
 import { Caption } from './components/caption';
 import { Blockquote as blockquote } from './components/blockquote';
@@ -32,5 +33,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     blockquote,
     Snippet,
     Caption,
+    Video,
   };
 }

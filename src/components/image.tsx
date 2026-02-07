@@ -1,4 +1,6 @@
-import NextImage from 'next/image';
+'use client';
+
+import { cloudinaryImage } from '@/lib/cloudinary';
 
 export const Image = ({
   src,
@@ -7,17 +9,31 @@ export const Image = ({
   src?: string;
   alt?: string;
 }) => {
+  if (!src) return null;
+
+  const cloudinarySrc = cloudinaryImage(src, {
+    width: 1000,
+    quality: 'auto',
+    format: 'auto',
+  });
+
+  const blurSrc = cloudinaryImage(src, {
+    width: 20,
+    quality: 10,
+  });
+
   return (
-    <NextImage
-      width={1000}
-      height={1000}
-      src={src ?? ''}
+    <img
+      src={cloudinarySrc}
       alt={originalAlt ?? ''}
       loading='lazy'
-      quality={85}
-      placeholder='blur'
-      blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+      style={{
+        maxWidth: '100%',
+        height: 'auto',
+        backgroundImage: `url(${blurSrc})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+      }}
     />
   );
 };
