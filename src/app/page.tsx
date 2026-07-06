@@ -64,7 +64,7 @@ function Resume() {
   const resume: Array<RoleType> = [
     {
       company: 'Zite',
-      title: 'Software Engineer',
+      title: 'Staff Software Engineer',
       logo: ziteLogo,
       start: '2024',
       end: 'Present',
