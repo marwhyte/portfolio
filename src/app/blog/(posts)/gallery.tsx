@@ -76,21 +76,24 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
             width: 640,
             quality: 'auto',
             format: 'auto',
+            aspectRatio: '3:4',
           });
 
           return (
             <button
               key={image}
               onClick={() => setSelectedImage(image)}
-              className='after:content after:shadow-highlight group relative mb-5 block flex w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg'
+              className='after:content after:shadow-highlight group relative block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg'
             >
               <img
-                className='transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110'
+                className='aspect-[3/4] w-full transform rounded-lg object-cover brightness-100 transition will-change-auto group-hover:brightness-110'
                 alt={image.split('.')[0].replaceAll('-', ' ')}
                 src={imageSrc}
-                srcSet={cloudinarySrcSet(`${post.slug}/${image}`, [
-                  320, 640, 960,
-                ])}
+                srcSet={cloudinarySrcSet(
+                  `${post.slug}/${image}`,
+                  [320, 640, 960],
+                  { aspectRatio: '3:4' }
+                )}
                 sizes='(max-width: 640px) 100vw, 320px'
                 loading='lazy'
               />

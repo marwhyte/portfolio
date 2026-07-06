@@ -3,16 +3,20 @@ const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 /**
  * Generate a Cloudinary URL for an image with automatic optimization
  */
+export interface CloudinaryImageOptions {
+  width?: number;
+  height?: number;
+  quality?: number | 'auto';
+  format?: 'auto' | 'webp' | 'avif' | 'jpg' | 'png';
+  /** Crop to this aspect ratio (e.g. '3:4') with subject-aware framing */
+  aspectRatio?: string;
+}
+
 export function cloudinaryImage(
   path: string,
-  options: {
-    width?: number;
-    height?: number;
-    quality?: number | 'auto';
-    format?: 'auto' | 'webp' | 'avif' | 'jpg' | 'png';
-  } = {}
+  options: CloudinaryImageOptions = {}
 ): string {
-  const { width, height, quality = 'auto', format = 'auto' } = options;
+  const { width, height, quality = 'auto', format = 'auto', aspectRatio } = options;
 
   // Remove leading slash and file extension (Cloudinary uses public_id without extension)
   let cleanPath = path.startsWith('/') ? path.slice(1) : path;
@@ -23,7 +27,11 @@ export function cloudinaryImage(
 
   if (width) transforms.push('w_' + width);
   if (height) transforms.push('h_' + height);
-  if (width || height) transforms.push('c_limit'); // Preserve aspect ratio
+  if (aspectRatio) {
+    transforms.push('ar_' + aspectRatio.replace('/', ':'), 'c_fill', 'g_auto');
+  } else if (width || height) {
+    transforms.push('c_limit'); // Preserve aspect ratio
+  }
 
   const transformString = transforms.join(',');
 
@@ -60,9 +68,13 @@ export function cloudinaryVideo(
 /**
  * Generate a srcset string with Cloudinary width variants for responsive/retina serving
  */
-export function cloudinarySrcSet(path: string, widths: number[]): string {
+export function cloudinarySrcSet(
+  path: string,
+  widths: number[],
+  options: Omit<CloudinaryImageOptions, 'width'> = {}
+): string {
   return widths
-    .map((w) => `${cloudinaryImage(path, { width: w })} ${w}w`)
+    .map((w) => `${cloudinaryImage(path, { ...options, width: w })} ${w}w`)
     .join(', ');
 }
 
