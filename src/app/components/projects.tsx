@@ -1,24 +1,24 @@
 import Card from './card';
-import graphMakerLogo from '../../../public/graph-maker-logo.png';
-import wandIcon from '../../../public/wand-icon.png';
+import filloutIcon from '../../../public/fillout-icon.svg';
+import ziteLogo from '../../../public/zite.png';
 import Image from 'next/image';
 import { LinkIcon } from '@heroicons/react/20/solid';
 
 const Projects = () => {
   const projects = [
     {
-      name: 'wand.email',
+      name: 'Zite',
       description:
-        'wand.email is an easy, drag-and-drop email builder that allows you to create beautiful emails in minutes, not hours. It integrates easily into most tech stacks, including html, react, and nextJS',
-      link: { href: 'https://wand.email', label: 'wand.email' },
-      logo: wandIcon,
+        'The AI builder that means business. Describe what you need and Zite builds your apps, workflows, and databases — auth, hosting, and security handled for you.',
+      link: { href: 'https://zite.com', label: 'zite.com' },
+      logo: ziteLogo,
     },
     {
-      name: 'GraphMaker',
+      name: 'Fillout',
       description:
-        'Instantly generate graphs using AI and communicate with your data using natural language.',
-      link: { href: 'https://graphmaker.ai', label: 'graphmaker.ai' },
-      logo: graphMakerLogo,
+        'The all-in-one form solution. Build powerful forms, surveys, and quizzes in minutes — with scheduling, payments, and hundreds of integrations built in.',
+      link: { href: 'https://www.fillout.com', label: 'fillout.com' },
+      logo: filloutIcon,
     },
   ];
 
