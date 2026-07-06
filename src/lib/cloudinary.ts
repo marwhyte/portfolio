@@ -58,6 +58,15 @@ export function cloudinaryVideo(
 }
 
 /**
+ * Generate a srcset string with Cloudinary width variants for responsive/retina serving
+ */
+export function cloudinarySrcSet(path: string, widths: number[]): string {
+  return widths
+    .map((w) => `${cloudinaryImage(path, { width: w })} ${w}w`)
+    .join(', ');
+}
+
+/**
  * Generate a blur placeholder URL (tiny low-quality version)
  */
 export function cloudinaryBlur(path: string): string {

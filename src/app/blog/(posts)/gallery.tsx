@@ -1,7 +1,7 @@
 'use client';
 
 import { PostData } from '@/lib/posts';
-import { cloudinaryImage } from '@/lib/cloudinary';
+import { cloudinaryImage, cloudinarySrcSet } from '@/lib/cloudinary';
 import { Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/16/solid';
 import { useSelectedLayoutSegments } from 'next/navigation';
@@ -17,7 +17,7 @@ const Modal = ({
   onClose: () => void;
 }) => {
   const imageSrc = cloudinaryImage(`${post.slug}/${image}`, {
-    width: 1200,
+    width: 2400,
     quality: 'auto',
     format: 'auto',
   });
@@ -73,7 +73,7 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
         {post.images.map((image) => {
           const imageSrc = cloudinaryImage(`${post.slug}/${image}`, {
-            width: 500,
+            width: 640,
             quality: 'auto',
             format: 'auto',
           });
@@ -88,6 +88,10 @@ const Gallery = ({ posts }: { posts: PostData[] }) => {
                 className='transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110'
                 alt={image.split('.')[0].replaceAll('-', ' ')}
                 src={imageSrc}
+                srcSet={cloudinarySrcSet(`${post.slug}/${image}`, [
+                  320, 640, 960,
+                ])}
+                sizes='(max-width: 640px) 100vw, 320px'
                 loading='lazy'
               />
             </button>
